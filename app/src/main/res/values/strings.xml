@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">SIPERA</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Email belum terdaftar</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="arti_sipera">Sistem Informasi Perhitungan Suara</string>
+    <string name="daftar">Daftar</string>
+    <string name="belum_memiliki_akun_silahkan">Belum memiliki akun?</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="nik">NIK</string>
+    <string name="nik_ktp">NIK KTP</string>
+    <string name="alamat">Alamat</string>
+    <string name="no_hp">NO. HP</string>
+    <string name="sudah_memiliki_akun_silahkan">Sudah memiliki akun?</string>
+    <string name="ulangi_password">Ulangi Password</string>
+</resources>

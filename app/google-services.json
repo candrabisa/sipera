@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "531125924604",
+    "firebase_url": "https://salamat-bb18e.firebaseio.com",
+    "project_id": "salamat-bb18e",
+    "storage_bucket": "salamat-bb18e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531125924604:android:07a981fcdbe4445627dd79",
+        "android_client_info": {
+          "package_name": "com.kgp.salamat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531125924604-ikuofeq83c4qog0mfkua0t8l4bbp3n5t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kgp.salamat",
+            "certificate_hash": "81486daabf0b13945442f79539596d9ef3780fe9"
+          }
+        },
+        {
+          "client_id": "531125924604-min9saqo9qbpskboc0hgk0ve2ajcgtuq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgyu1VJfB89Yh4HjrE9K2XK8JT-JXkyNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531125924604-min9saqo9qbpskboc0hgk0ve2ajcgtuq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
