@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/relawan"
+        android:id="@+id/Navigation_Beranda"
+        android:title="Beranda"
+        android:icon="@drawable/kandidat"/>
+
+    <item
+        android:id="@+id/Navigation_Relawan"
         android:title="Relawan"
         android:icon="@drawable/usergrup"/>
 
     <item
-        android:id="@+id/pendukung"
-        android:title="Pendukung"
+        android:id="@+id/Navigation_Profil"
+        android:title="Profil"
         android:icon="@drawable/pendukung"/>
-
-    <item
-        android:id="@+id/kandidat"
-        android:title="Kandidat"
-        android:icon="@drawable/kandidat"/>
-
-    <item
-        android:id="@+id/realcount"
-        android:title="RealCount"
-        android:icon="@drawable/realcount"/>
-
 
 </menu>

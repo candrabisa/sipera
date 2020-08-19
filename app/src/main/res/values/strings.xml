@@ -19,4 +19,17 @@
     <string name="no_hp">NO. HP</string>
     <string name="sudah_memiliki_akun_silahkan">Sudah memiliki akun?</string>
     <string name="ulangi_password">Ulangi Password</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="list_tps">
+        <item>TPS01</item>
+        <item>TPS02</item>
+        <item>TPS03</item>
+        <item>TPS04</item>
+        <item>TPS05</item>
+        <item>TPS06</item>
+        <item>TPS07</item>
+        <item>TPS08</item>
+        <item>TPS09</item>
+    </string-array>
 </resources>
