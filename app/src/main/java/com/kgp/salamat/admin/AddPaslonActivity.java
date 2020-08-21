@@ -1,8 +1,8 @@
 package com.kgp.salamat.admin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.kgp.salamat.R;
 

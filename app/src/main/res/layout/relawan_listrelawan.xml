@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:contentPadding="3dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--ImageView:User profil image-->
+        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+            android:id="@+id/ivProfile_listRelawan"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/man"/>
+        <!--Textview Nama-->
+        <TextView
+            android:id="@+id/tvNama_listRelawan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama_Anda"
+            android:textStyle="bold"
+            android:layout_toEndOf="@id/ivProfile_listRelawan"
+            android:textSize="18sp"
+            android:layout_marginStart="4dp"
+            android:textColor="#000000"/>
+        <TextView
+            android:id="@+id/tvNOHP_listRelawan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="08123456789"
+            android:layout_marginStart="4dp"
+            android:maxLines="2"
+            android:layout_toEndOf="@+id/ivProfile_listRelawan"
+            android:layout_below="@id/tvNama_listRelawan"
+            android:textColor="#000000"/>
+        <TextView
+            android:id="@+id/tvTPS_listRelawan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TPS001 Cikarang Selatan"
+            android:layout_marginStart="4dp"
+            android:layout_toEndOf="@id/ivProfile_listRelawan"
+            android:layout_below="@id/tvNOHP_listRelawan"/>
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

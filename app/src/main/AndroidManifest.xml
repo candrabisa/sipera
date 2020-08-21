@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin.AddPaslonActivity"></activity>
+        <activity android:name=".relawan.ProfilRelawanActivity"></activity>
+        <activity android:name=".app.AppController"/>
+        <activity android:name=".relawan.InputSuaraActivity" />
+        <activity android:name=".admin.AddPaslonActivity" />
         <activity android:name=".admin.DataPaslonActivity" />
         <activity android:name=".admin.DetailListRelawanActivity" />
         <activity android:name=".admin.ListRelawanActivity" />
@@ -29,6 +32,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SplashScreenActivity2"
+            android:theme="@style/AppTheme.NoAction" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoAction" />
