@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="8dp"
     android:orientation="vertical"
-    tools:context=".admin.DetailListRelawanActivity">
+    tools:context=".admin.Detail.DetailListRelawanActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

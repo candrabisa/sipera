@@ -1,16 +1,16 @@
-package com.kgp.salamat.admin;
-
-import android.os.Bundle;
+package com.kgp.salamat.admin.Detail;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Bundle;
+
 import com.kgp.salamat.R;
 
-public class AddPaslonActivity extends AppCompatActivity {
+public class DetailTpsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_paslon);
+        setContentView(R.layout.activity_detail_tps);
     }
 }

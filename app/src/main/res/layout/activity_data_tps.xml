@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".admin.DataPaslonActivity">
+    tools:context=".admin.DataTpsActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Data Paslon"
+            android:text="Data TPS"
             android:textSize="23dp"
             android:textStyle="bold" />
 
@@ -41,23 +41,25 @@
             android:gravity="center"
             android:text="20 Agsutus 2019" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:itemCount="2"
-            tools:listitem="@layout/item_list_paslon">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
         <Button
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="6dp"
 
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
             android:background="@drawable/btnlock"
-            android:text="Lock Paslon"
+            android:text="Lock TPS"
             android:textColor="#FFFFFF" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_tps">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 
