@@ -5,10 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".fragment.fragment_beranda">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="" />
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/relawan_listPaslon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            tools:listitem="@layout/relawan_listpaslon"/>
+    </ScrollView>
 
 </FrameLayout>

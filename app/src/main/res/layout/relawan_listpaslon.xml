@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:contentPadding="3dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_listPaslon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/man1"/>
+        <LinearLayout
+            android:id="@+id/ll_nomorurut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toRightOf="@id/iv_listPaslon">
+            <TextView
+                android:id="@+id/tv_relawannomorPaslon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="01"
+                android:textSize="24sp"
+                android:padding="8dp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/ic_lens_black_24dp"
+                android:layout_toRightOf="@id/iv_listPaslon"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_namapaslon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toRightOf="@id/iv_listPaslon"
+            android:layout_below="@id/ll_nomorurut">
+            <TextView
+                android:id="@+id/tv_relawannamaPaslon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:text="Candra Billy - Misbahul Munir"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toRightOf="@id/iv_listPaslon"
+            android:layout_below="@id/ll_namapaslon">
+            <TextView
+                android:id="@+id/tv_relawantotalSuara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123.000"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Suara"
+                android:layout_marginLeft="@dimen/cardview_default_radius"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

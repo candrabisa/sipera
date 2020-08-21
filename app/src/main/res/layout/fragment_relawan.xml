@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         tools:ignore="UselessParent">
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/relawan_Recycler"
+            android:id="@+id/relawan_listRelawan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/relawan_listrelawan"
