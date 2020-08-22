@@ -4,31 +4,41 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin.Add.UbahProfileActivity"></activity>
-        <activity android:name=".admin.ProfilAdminActivity" />
-        <activity android:name=".admin.Detail.DetailTpsActivity" />
-        <activity android:name=".admin.Add.AddTpsActivity" />
-        <activity android:name=".admin.DataTpsActivity" />
-        <activity android:name=".admin.Detail.DetailPaslonActivity" />
+        <activity android:name=".admin.Add.UbahProfileActivity" android:theme="@style/ThemaBiru"></activity>
+        <activity android:name=".admin.ProfilAdminActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.Detail.DetailTpsActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.Add.AddTpsActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.DataTpsActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.Detail.DetailPaslonActivity" android:theme="@style/ThemaBiru"/>
         <activity android:name=".relawan.ProfilRelawanActivity" />
         <activity android:name=".app.AppController" />
         <activity android:name=".relawan.InputSuaraActivity" />
-        <activity android:name=".admin.Add.AddPaslonActivity" />
-        <activity android:name=".admin.DataPaslonActivity" />
-        <activity android:name=".admin.Detail.DetailListRelawanActivity" />
-        <activity android:name=".admin.ListRelawanActivity" />
-        <activity android:name=".admin.Detail.DetailTerimaActivity" />
-        <activity android:name=".admin.TerimaRelawanActivity" />
-        <activity android:name=".admin.HasilSuaraActivity" />
-        <activity android:name=".admin.AdminActivity" />
+        <activity android:name=".admin.Add.AddPaslonActivity" android:theme="@style/ThemaBiru" />
+        <activity android:name=".admin.DataPaslonActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.Detail.DetailListRelawanActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.ListRelawanActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.Detail.DetailTerimaActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.TerimaRelawanActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.HasilSuaraActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.AdminActivity" android:theme="@style/ThemaBiru">
+
+
+
+        </activity>
+
+
         <activity
             android:name=".SplashScreenActivity"
             android:theme="@style/AppTheme.NoAction">
@@ -37,6 +47,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".SplashScreenActivity2"

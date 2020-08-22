@@ -12,11 +12,12 @@
         android:orientation="vertical">
 
         <TextView
+            android:layout_marginTop="19dp"
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Admin Sipera"
+            android:text="Admin"
             android:textSize="23dp"
             android:textStyle="bold" />
 
@@ -36,6 +37,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:clickable="true"
+                android:onClick="HasilSuara"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="#03A9F4"
@@ -51,7 +54,7 @@
                         android:id="@+id/imageViefw2"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:layout_margin="6dp"
+                        android:layout_margin="8dp"
                         app:srcCompat="@drawable/suara" />
 
                     <TextView
@@ -70,6 +73,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:clickable="true"
+                android:onClick="TerimaRelawan"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="#03A9F4"
@@ -84,9 +89,9 @@
                         android:id="@+id/texdftView5"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:layout_margin="6dp"
+                        android:layout_margin="8dp"
                         android:gravity="center"
-                        android:text="100"
+                        android:text="0"
                         android:textColor="#FFFFFF"
                         android:textSize="50dp" />
 
@@ -111,6 +116,8 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+               android:clickable="true"
+                android:onClick="ListRelawan"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
@@ -126,9 +133,9 @@
                         android:id="@+id/textVissaew5"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:layout_margin="6dp"
+                        android:layout_margin="8dp"
                         android:gravity="center"
-                        android:text="100"
+                        android:text="0"
                         android:textColor="#FFFFFF"
                         android:textSize="50dp" />
 
@@ -147,6 +154,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:clickable="true"
+                android:onClick="DataPaslon"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="#03A9F4"
@@ -161,9 +170,9 @@
                         android:id="@+id/texastView5"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:layout_margin="6dp"
+                        android:layout_margin="8dp"
                         android:gravity="center"
-                        android:text="100"
+                        android:text="0"
                         android:textColor="#FFFFFF"
                         android:textSize="50dp" />
 
@@ -190,6 +199,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
+                android:clickable="true"
+                android:onClick="DataTps"
                 android:layout_weight="1"
                 app:cardBackgroundColor="#03A9F4"
                 app:cardCornerRadius="10dp">
@@ -203,9 +214,9 @@
                         android:id="@+id/textView5"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:layout_margin="6dp"
+                        android:layout_margin="8dp"
                         android:gravity="center"
-                        android:text="100"
+                        android:text="0"
                         android:textColor="#FFFFFF"
                         android:textSize="50dp" />
 
@@ -223,6 +234,8 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+               android:clickable="true"
+                android:onClick="Profile"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
@@ -239,7 +252,7 @@
                         android:id="@+id/imageView2"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:layout_margin="6dp"
+                        android:layout_margin="8dp"
                         app:srcCompat="@drawable/man" />
 
                     <TextView

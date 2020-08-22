@@ -11,6 +11,7 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="AddDataPaslon"
         android:clickable="true"
         android:layout_marginBottom="12dp"
         android:layout_marginRight="12dp"
