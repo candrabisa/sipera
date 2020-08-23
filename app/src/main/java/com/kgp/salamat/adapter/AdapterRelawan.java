@@ -11,26 +11,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kgp.salamat.R;
-import com.kgp.salamat.model.ModelListRelawan;
+import com.kgp.salamat.model.RelawanItem;
+import com.kgp.salamat.model.ResponseListRelawan;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterRelawan extends RecyclerView.Adapter<AdapterRelawan.ViewHolder> {
 
-    private final ArrayList<ModelListRelawan> relawanList = new ArrayList<>();
+    public AdapterRelawan(List<RelawanItem> relawanItems, Context context) {
+        this.relawanItems = relawanItems;
+        this.context = context;
+    }
+
+    private final List<RelawanItem>relawanItems;
     private final Context context;
 
-    public AdapterRelawan(Context context) { this.context = context;}
 
-    public void setRelawanList(ArrayList<ModelListRelawan> relawanitem){
-        if (relawanitem != null){
-            if (relawanitem.size()>0){
-                relawanitem.clear();
-            }
-            relawanitem.addAll(relawanitem);
-        }
-        notifyDataSetChanged();
-    }
 
     @NonNull
     @Override
@@ -42,23 +39,22 @@ public class AdapterRelawan extends RecyclerView.Adapter<AdapterRelawan.ViewHold
     @Override
     public void onBindViewHolder(@NonNull AdapterRelawan.ViewHolder holder, int position) {
 
-        holder.tvNama.setText(String.valueOf(relawanList.get(position).getNama_lengkap()));
-        holder.tvHP.setText(String.valueOf(relawanList.get(position).getNo_hp()));
-        holder.tvTPS.setText(String.valueOf(relawanList.get(position).getTps()));
+        holder.tvNama.setText(String.valueOf(relawanItems.get(position).getNamaLengkap()));
+        holder.tvHP.setText(String.valueOf(relawanItems.get(position).getNoHp()));
+        holder.tvTPS.setText(String.valueOf(relawanItems.get(position).getTps()));
     }
 
     @Override
     public int getItemCount() {
-        return relawanList.size();
+        return relawanItems.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        final ImageView ivProfil;
         final TextView tvNama, tvHP, tvTPS;
 
         ViewHolder(@NonNull View itemView){
             super(itemView);
-            ivProfil = itemView.findViewById(R.id.ivProfile_listRelawan);
+
             tvNama = itemView.findViewById(R.id.tvNama_listRelawan);
             tvHP = itemView.findViewById(R.id.tvNOHP_listRelawan);
             tvTPS = itemView.findViewById(R.id.tvTPS_listRelawan);

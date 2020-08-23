@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.kgp.salamat.api.Api;
 import com.kgp.salamat.api.ApiService;
-import com.kgp.salamat.model.ModelListRelawan;
+import com.kgp.salamat.model.ResponseListRelawan;
 import com.kgp.salamat.service.RetrofitServiceApi;
 
 import java.util.ArrayList;
@@ -18,25 +18,26 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class view_listrelawan extends ViewModel {
-    private final MutableLiveData<ArrayList<ModelListRelawan>> liveData = new MutableLiveData<>();
+    private final MutableLiveData<ResponseListRelawan> liveData = new MutableLiveData<>();
 
     public void setListRelawanData(){
         Retrofit retrofit = RetrofitServiceApi.getRetrofitService();
         ApiService endpoint = retrofit.create(ApiService.class);
-        Call<List<ModelListRelawan>> call = endpoint.getListRelawan();
-        call.enqueue(new Callback<List<ModelListRelawan>>() {
+        Call<ResponseListRelawan> call = endpoint.getListRelawan();
+        call.enqueue(new Callback<ResponseListRelawan>() {
             @Override
-            public void onResponse(Call<List<ModelListRelawan>> call, Response<List<ModelListRelawan>> response) {
-                liveData.setValue((ArrayList<ModelListRelawan>)response.body());
+            public void onResponse(Call<ResponseListRelawan> call, Response<ResponseListRelawan> response) {
+                liveData.setValue((ResponseListRelawan) response.body());
             }
 
             @Override
-            public void onFailure(Call<List<ModelListRelawan>> call, Throwable t) {
+            public void onFailure(Call<ResponseListRelawan> call, Throwable t) {
 
             }
+
         });
     }
-    public LiveData<ArrayList<ModelListRelawan>> getListRelawanData(){
+    public LiveData<ResponseListRelawan> getListRelawanData(){
         return liveData;
     }
 }

@@ -19,69 +19,79 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.kgp.salamat.R;
 import com.kgp.salamat.adapter.AdapterRelawan;
-import com.kgp.salamat.model.ModelListRelawan;
+import com.kgp.salamat.model.RelawanItem;
+import com.kgp.salamat.model.ResponseListRelawan;
 import com.kgp.salamat.view.view_listrelawan;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-
+   List <RelawanItem>listRelawan = new ArrayList<>();
+  //ArrayList<RelawanItem> relawanList = new ArrayList<>();
     public fragment_relawan() {
         // Required empty public constructor
     }
 
     private AdapterRelawan adapterRelawan;
-    private SwipeRefreshLayout swipeRefreshLayout;
+    //private SwipeRefreshLayout swipeRefreshLayout;
     private TextView tvEmpty;
-
+    RecyclerView recyclerView;
+    private static final String TAG = "fragment_relawan";
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
         tvEmpty = view.findViewById(R.id.tvEmptyListRelawan);
-        RecyclerView recyclerView = view.findViewById(R.id.relawan_listRelawan);
-        adapterRelawan = new AdapterRelawan(getContext());
+        recyclerView = view.findViewById(R.id.relawan_listRelawan);
+        loadRelawanData();
+       adapterRelawan = new AdapterRelawan(listRelawan,getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         recyclerView.setAdapter(adapterRelawan);
         
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshListRelawan);
-        swipeRefreshLayout.setOnRefreshListener(this);
-        
-        loadRelawanData();
+//        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshListRelawan);
+//        swipeRefreshLayout.setOnRefreshListener(this);
+//
+
     }
     private void loadRelawanData(){
         view_listrelawan viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(view_listrelawan.class);
         viewModel.setListRelawanData();
-        refreshing(true);
-        viewModel.getListRelawanData().observe(getViewLifecycleOwner(), new Observer<ArrayList<ModelListRelawan>>() {
+       // refreshing(true);
+        viewModel.getListRelawanData().observe(getViewLifecycleOwner(), new Observer<ResponseListRelawan>() {
+            private static final String TAG = "fragment_relawan";
             @Override
-            public void onChanged(ArrayList<ModelListRelawan> modelListRelawans) {
-                if (modelListRelawans == null){
+            public void onChanged(ResponseListRelawan responseListRelawan) {
+                if (responseListRelawan == null){
                     tvEmpty.setVisibility(View.VISIBLE);
-                    refreshing(false);
+                  // refreshing(false);
                 } else {
-                    adapterRelawan.setRelawanList(modelListRelawans);
-                    refreshing(false);
+
+                   listRelawan = responseListRelawan.getRelawan();
+                    adapterRelawan = new AdapterRelawan(listRelawan,getContext());
+                    recyclerView.setAdapter(adapterRelawan);
+                  // refreshing(false);
                 }
             }
         });
     }
 
-    private void refreshing(boolean b) {
-        if (b){
-            swipeRefreshLayout.setRefreshing(true);
-        } else {
-            swipeRefreshLayout.setRefreshing(false);
-        }
-    }
+//    private void refreshing(boolean b) {
+//        if (b){
+//            swipeRefreshLayout.setRefreshing(true);
+//        } else {
+//            swipeRefreshLayout.setRefreshing(false);
+//        }
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
