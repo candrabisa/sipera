@@ -6,6 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,19 +19,69 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.kgp.salamat.R;
+import com.kgp.salamat.adapter.AdapterRelawan;
+import com.kgp.salamat.model.ModelListRelawan;
+import com.kgp.salamat.view.view_listrelawan;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class fragment_relawan extends Fragment {
+public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     public fragment_relawan() {
         // Required empty public constructor
     }
 
+    private AdapterRelawan adapterRelawan;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private TextView tvEmpty;
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        tvEmpty = view.findViewById(R.id.tvEmptyListRelawan);
+        RecyclerView recyclerView = view.findViewById(R.id.relawan_listRelawan);
+        adapterRelawan = new AdapterRelawan(getContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapterRelawan);
+        
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshListRelawan);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        
+        loadRelawanData();
+    }
+    private void loadRelawanData(){
+        view_listrelawan viewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(view_listrelawan.class);
+        viewModel.setListRelawanData();
+        refreshing(true);
+        viewModel.getListRelawanData().observe(getViewLifecycleOwner(), new Observer<ArrayList<ModelListRelawan>>() {
+            @Override
+            public void onChanged(ArrayList<ModelListRelawan> modelListRelawans) {
+                if (modelListRelawans == null){
+                    tvEmpty.setVisibility(View.VISIBLE);
+                    refreshing(false);
+                } else {
+                    adapterRelawan.setRelawanList(modelListRelawans);
+                    refreshing(false);
+                }
+            }
+        });
+    }
+
+    private void refreshing(boolean b) {
+        if (b){
+            swipeRefreshLayout.setRefreshing(true);
+        } else {
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,8 +131,14 @@ public class fragment_relawan extends Fragment {
     }
 
     private void getAllUser() {
+
     }
 
     private void searchUsers(String query) {
+    }
+
+    @Override
+    public void onRefresh() {
+        loadRelawanData();
     }
 }
