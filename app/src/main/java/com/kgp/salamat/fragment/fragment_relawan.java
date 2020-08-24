@@ -53,7 +53,7 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
         tvEmpty = view.findViewById(R.id.tvEmptyListRelawan);
         recyclerView = view.findViewById(R.id.relawan_listRelawan);
         loadRelawanData();
-       adapterRelawan = new AdapterRelawan(listRelawan,getContext());
+        adapterRelawan = new AdapterRelawan(listRelawan,getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         recyclerView.setAdapter(adapterRelawan);

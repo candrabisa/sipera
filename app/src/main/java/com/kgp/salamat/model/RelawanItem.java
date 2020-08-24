@@ -124,3 +124,4 @@ public class RelawanItem{
 		return urlImage;
 	}
 }
+

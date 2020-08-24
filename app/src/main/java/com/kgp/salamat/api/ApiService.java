@@ -1,5 +1,6 @@
 package com.kgp.salamat.api;
 
+import com.kgp.salamat.model.ResponseListPaslon;
 import com.kgp.salamat.model.ResponseListRelawan;
 
 import java.util.List;
@@ -12,4 +13,8 @@ public interface ApiService {
     //endpoint list relawan
     @GET(Api.ENDPOINT_LIST_RELAWAN)
     Call<ResponseListRelawan> getListRelawan();
+
+    //endpoint list paslon
+    @GET(Api.ENDPOINT_LIST_PASLON)
+    Call<ResponseListPaslon> getListPaslon();
 }

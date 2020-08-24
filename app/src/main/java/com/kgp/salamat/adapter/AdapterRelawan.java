@@ -42,6 +42,11 @@ public class AdapterRelawan extends RecyclerView.Adapter<AdapterRelawan.ViewHold
         holder.tvNama.setText(String.valueOf(relawanItems.get(position).getNamaLengkap()));
         holder.tvHP.setText(String.valueOf(relawanItems.get(position).getNoHp()));
         holder.tvTPS.setText(String.valueOf(relawanItems.get(position).getTps()));
+//=======
+//        holder.tvNama.setText(String.valueOf(relawanList.get(position).getAttributesRelawan().getNama_lengkap()));
+//        holder.tvHP.setText(String.valueOf(relawanList.get(position).getAttributesRelawan().getNo_hp()));
+//        holder.tvTPS.setText(String.valueOf(relawanList.get(position).getAttributesRelawan().getTps()));
+//>>>>>>> Stashed changes
     }
 
     @Override
