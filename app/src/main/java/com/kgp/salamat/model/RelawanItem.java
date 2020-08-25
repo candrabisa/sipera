@@ -7,7 +7,7 @@ public class RelawanItem{
 		this.nik = nik;
 	}
 
-	public void setIdRelawan(String idRelawan) {
+	public void setIdRelawan( RelawanItem idRelawan) {
 		this.idRelawan = idRelawan;
 	}
 
@@ -51,7 +51,7 @@ public class RelawanItem{
 	private String nik;
 
 	@SerializedName("id_relawan")
-	private String idRelawan;
+	private RelawanItem idRelawan;
 
 	@SerializedName("cdd")
 	private String cdd;
@@ -84,7 +84,7 @@ public class RelawanItem{
 		return nik;
 	}
 
-	public String getIdRelawan(){
+	public RelawanItem getIdRelawan(){
 		return idRelawan;
 	}
 
