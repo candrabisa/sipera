@@ -1,5 +1,6 @@
 package com.kgp.salamat.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.kgp.salamat.R;
@@ -39,11 +41,12 @@ public class fragment_beranda extends Fragment {
 
     private AdapterPaslon adapterPaslon;
     RecyclerView recyclerView;
+    private ProgressBar progressBar;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        progressBar = view.findViewById(R.id.pb_RelawanBeranda);
         recyclerView = view.findViewById(R.id.recycler_listPaslon);
         loadPaslonData();
         adapterPaslon = new AdapterPaslon(paslonItemList, getContext());
@@ -57,6 +60,7 @@ public class fragment_beranda extends Fragment {
         viewModel.getListPaslonData().observe(getViewLifecycleOwner(), new Observer<ResponseListPaslon>() {
             @Override
             public void onChanged(ResponseListPaslon responseListPaslon) {
+                progressBar.setVisibility(View.VISIBLE);
                 if (responseListPaslon == null){
                     Toast.makeText(getContext(), "Gagal Memuat Paslon", Toast.LENGTH_SHORT).show();
                 } else {
@@ -64,8 +68,10 @@ public class fragment_beranda extends Fragment {
                     adapterPaslon = new AdapterPaslon(paslonItemList, getContext());
                     recyclerView.setAdapter(adapterPaslon);
                 }
+                progressBar.setVisibility(View.GONE);
             }
         });
+
     }
 
     @Override

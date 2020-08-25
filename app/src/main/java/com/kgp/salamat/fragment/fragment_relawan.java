@@ -67,6 +67,7 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
 
         super.onViewCreated(view, savedInstanceState);
         tvEmpty = view.findViewById(R.id.tvEmptyListRelawan);
+        progressBar = view.findViewById(R.id.pb_RelawanList);
         recyclerView = view.findViewById(R.id.relawan_listRelawan);
 
         adapterRelawan = new AdapterRelawan(listRelawan,getContext());
@@ -87,6 +88,7 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
             private static final String TAG = "fragment_relawan";
             @Override
             public void onChanged(ResponseListRelawan responseListRelawan) {
+                progressBar.setVisibility(View.VISIBLE);
                 if (responseListRelawan == null){
                     tvEmpty.setVisibility(View.VISIBLE);
                     refreshing(false);
@@ -97,7 +99,9 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
                     adapterRelawan = new AdapterRelawan(listRelawan,getContext());
                     recyclerView.setAdapter(adapterRelawan);
                     refreshing(false);
+                    tvEmpty.setVisibility(View.GONE);
                 }
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -163,28 +167,28 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
     }
 
     private void searchUsers(String query) {
-        view_listrelawan view_listrelawan = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(view_listrelawan.class);
-        view_listrelawan.setListRelawanData();
-        view_listrelawan.getListRelawanData().observe(getViewLifecycleOwner(), new Observer<ResponseListRelawan>() {
-            @Override
-            public void onChanged(ResponseListRelawan responseListRelawan) {
-                for (RelawanItem relawan : responseListRelawan.getRelawan()){
-                    RelawanItem relawanItem = relawan.getIdRelawan();
-                    if (!relawanItem.getIdRelawan().equals(relawanItem)){
-                        if (relawanItem.getNamaLengkap().toLowerCase().contains(query.toLowerCase()) ||
-                        relawanItem.getNoHp().toLowerCase().contains(query.toLowerCase()) ||
-                        relawanItem.getTps().toLowerCase().contains(query.toLowerCase())) {
-                            listRelawan.add(relawanItem);
-                        }
-                    }
-                    listRelawan = responseListRelawan.getRelawan();
-                    adapterRelawan = new AdapterRelawan(listRelawan, getContext());
-                    adapterRelawan.notifyDataSetChanged();
-                    recyclerView.setAdapter(adapterRelawan);
-                }
-
-            }
-        });
+//        view_listrelawan view_listrelawan = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(view_listrelawan.class);
+//        view_listrelawan.setListRelawanData();
+//        view_listrelawan.getListRelawanData().observe(getViewLifecycleOwner(), new Observer<ResponseListRelawan>() {
+//            @Override
+//            public void onChanged(ResponseListRelawan responseListRelawan) {
+//                for (RelawanItem relawan : responseListRelawan.getRelawan()){
+//                    RelawanItem relawanItem = relawan.getIdRelawan();
+//                    if (!relawanItem.getIdRelawan().equals(relawanItem)){
+//                        if (relawanItem.getNamaLengkap().toLowerCase().contains(query.toLowerCase()) ||
+//                        relawanItem.getNoHp().toLowerCase().contains(query.toLowerCase()) ||
+//                        relawanItem.getTps().toLowerCase().contains(query.toLowerCase())) {
+//                            listRelawan.add(relawanItem);
+//                        }
+//                    }
+//                    listRelawan = responseListRelawan.getRelawan();
+//                    adapterRelawan = new AdapterRelawan(listRelawan, getContext());
+//                    adapterRelawan.notifyDataSetChanged();
+//                    recyclerView.setAdapter(adapterRelawan);
+//                }
+//
+//            }
+//        });
     }
 
     @Override
