@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         tv_register = findViewById(R.id.btn_register);
 
+
         loadDaata();
         if(user.equals(null) || pass.equals(null)){
 
@@ -76,7 +77,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-   public void mlebet(){
+
+
+    public void mlebet(){
         user =etUsername.getText().toString();
         pass = etPassword.getText().toString();
         if(user.equals("")){

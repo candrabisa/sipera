@@ -27,8 +27,10 @@ public class ProfilAdminActivity extends AppCompatActivity {
 
     public void Keluar(View view) {
         getSharedPreferences(sharedprefren, 0).edit().clear().commit();
-        Intent intentRegister = new Intent(ProfilAdminActivity.this, LoginActivity.class);
-        startActivity(intentRegister);
+        Intent intent = new Intent(ProfilAdminActivity.this,LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        ProfilAdminActivity.this.finish();
         finish();
     }
 }
