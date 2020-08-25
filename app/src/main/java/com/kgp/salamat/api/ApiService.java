@@ -20,9 +20,5 @@ public interface ApiService {
     @GET(Api.ENDPOINT_SPINNER_TPS)
     Call<ResponseSpinnerTps> getspinnertps();
 
-<<<<<<< Updated upstream
-=======
-    @GET(Api.ENDPOINT_LIST_RELAWAN)
-    Call<ResponseListRelawan> getListRelawan(String query);
->>>>>>> Stashed changes
+
 }

@@ -46,9 +46,6 @@ import retrofit2.Retrofit;
  */
 public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-   public static final String URL = "http://nakulasadewaindonesia.com/tikep/service/relawan/ambilrelawan/";
-    private Object AdapterRelawan;
-
     //ArrayList<RelawanItem> relawanList = new ArrayList<>();
     public fragment_relawan() {
         // Required empty public constructor
@@ -60,7 +57,7 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private List <RelawanItem>listRelawan = new ArrayList<>();
-    private ChipGroup chipGroup;
+
 
     private static final String TAG = "fragment_relawan";
     @Override
@@ -153,30 +150,6 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
                     getAllUser();
                 }
                 return false;
-//                Retrofit retrofit = RetrofitServiceApi.getRetrofitService();
-//                ApiService apiService = retrofit.create(ApiService.class);
-//                Call<ResponseListRelawan> call = apiService.getListRelawan(query);
-//                call.enqueue(new Callback<ResponseListRelawan>() {
-//                    @Override
-//                    public void onResponse(Call<ResponseListRelawan> call, Response<ResponseListRelawan> response) {
-//                        List<RelawanItem> value = response.body().getRelawan();
-//                        if (value.equals("1")){
-////                    liveData.setValue((ResponseListRelawan)response.body().getRelawan());
-//                            listRelawan = response.body().getRelawan();
-//                            adapterRelawan = new AdapterRelawan(listRelawan, getContext());
-//                            adapterRelawan.notifyDataSetChanged();
-//                            adapterRelawan.getFilter().filter(query);
-//                            recyclerView.setAdapter(adapterRelawan);
-//
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<ResponseListRelawan> call, Throwable t) {
-//
-//                    }
-//                });
-//                return false;
             }
         });
     }
@@ -186,7 +159,6 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
     }
 
     private void searchUsers(String query) {
-//        final MutableLiveData<ResponseListRelawan> liveData = new MutableLiveData<>();
 
         view_listrelawan view_listrelawan = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(view_listrelawan.class);
         view_listrelawan.setListRelawanData();
