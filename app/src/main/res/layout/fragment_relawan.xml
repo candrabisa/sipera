@@ -9,6 +9,7 @@
     app:contentPadding="3dp"
     tools:context=".fragment.fragment_relawan">
 
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshListRelawan"
         android:layout_width="match_parent"
@@ -16,16 +17,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/relawan_listRelawan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-    </ScrollView>
+                    android:id="@+id/relawan_listRelawan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <TextView
         android:id="@+id/tvEmptyListRelawan"
         android:layout_width="wrap_content"
@@ -50,5 +55,12 @@
         android:layout_gravity="center"
         android:visibility="visible"
         android:layout_centerInParent="true"/>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:chipSpacing="25dp"/>
 
 </RelativeLayout>

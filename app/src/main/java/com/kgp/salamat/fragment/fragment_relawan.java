@@ -1,13 +1,12 @@
 package com.kgp.salamat.fragment;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.text.TextUtils;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,27 +24,29 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.google.android.material.chip.ChipGroup;
 import com.kgp.salamat.R;
 import com.kgp.salamat.adapter.AdapterRelawan;
 import com.kgp.salamat.api.ApiService;
-import com.kgp.salamat.model.PaslonItem;
 import com.kgp.salamat.model.RelawanItem;
 import com.kgp.salamat.model.ResponseListRelawan;
+import com.kgp.salamat.service.RetrofitServiceApi;
 import com.kgp.salamat.view.view_listrelawan;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-   List <RelawanItem>listRelawan = new ArrayList<>();
+
+   public static final String URL = "http://nakulasadewaindonesia.com/tikep/service/relawan/ambilrelawan/";
     private Object AdapterRelawan;
 
     //ArrayList<RelawanItem> relawanList = new ArrayList<>();
@@ -59,7 +59,8 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
     private TextView tvEmpty;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private ApiService apiService;
+    private List <RelawanItem>listRelawan = new ArrayList<>();
+    private ChipGroup chipGroup;
 
     private static final String TAG = "fragment_relawan";
     @Override
@@ -88,6 +89,7 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
             private static final String TAG = "fragment_relawan";
             @Override
             public void onChanged(ResponseListRelawan responseListRelawan) {
+                listRelawan.clear();
                 progressBar.setVisibility(View.VISIBLE);
                 if (responseListRelawan == null){
                     tvEmpty.setVisibility(View.VISIBLE);
@@ -131,7 +133,7 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.action_navigasi, menu);
-
+        super.onCreateOptionsMenu(menu, inflater);
         //view cari
         MenuItem item = menu.findItem(R.id.nav_cari);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
@@ -140,26 +142,43 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if(!TextUtils.isEmpty(query.trim())) {
-                    searchUsers(query);
-                } else {
-                    getAllUser();
-                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                if(!query.equals("")) {
+                if(!query.equals(query)) {
                     searchUsers(query);
                 } else {
                     getAllUser();
                 }
                 return false;
+//                Retrofit retrofit = RetrofitServiceApi.getRetrofitService();
+//                ApiService apiService = retrofit.create(ApiService.class);
+//                Call<ResponseListRelawan> call = apiService.getListRelawan(query);
+//                call.enqueue(new Callback<ResponseListRelawan>() {
+//                    @Override
+//                    public void onResponse(Call<ResponseListRelawan> call, Response<ResponseListRelawan> response) {
+//                        List<RelawanItem> value = response.body().getRelawan();
+//                        if (value.equals("1")){
+////                    liveData.setValue((ResponseListRelawan)response.body().getRelawan());
+//                            listRelawan = response.body().getRelawan();
+//                            adapterRelawan = new AdapterRelawan(listRelawan, getContext());
+//                            adapterRelawan.notifyDataSetChanged();
+//                            adapterRelawan.getFilter().filter(query);
+//                            recyclerView.setAdapter(adapterRelawan);
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ResponseListRelawan> call, Throwable t) {
+//
+//                    }
+//                });
+//                return false;
             }
         });
-
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void getAllUser() {
@@ -167,28 +186,18 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
     }
 
     private void searchUsers(String query) {
-//        view_listrelawan view_listrelawan = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(view_listrelawan.class);
-//        view_listrelawan.setListRelawanData();
-//        view_listrelawan.getListRelawanData().observe(getViewLifecycleOwner(), new Observer<ResponseListRelawan>() {
-//            @Override
-//            public void onChanged(ResponseListRelawan responseListRelawan) {
-//                for (RelawanItem relawan : responseListRelawan.getRelawan()){
-//                    RelawanItem relawanItem = relawan.getIdRelawan();
-//                    if (!relawanItem.getIdRelawan().equals(relawanItem)){
-//                        if (relawanItem.getNamaLengkap().toLowerCase().contains(query.toLowerCase()) ||
-//                        relawanItem.getNoHp().toLowerCase().contains(query.toLowerCase()) ||
-//                        relawanItem.getTps().toLowerCase().contains(query.toLowerCase())) {
-//                            listRelawan.add(relawanItem);
-//                        }
-//                    }
-//                    listRelawan = responseListRelawan.getRelawan();
-//                    adapterRelawan = new AdapterRelawan(listRelawan, getContext());
-//                    adapterRelawan.notifyDataSetChanged();
-//                    recyclerView.setAdapter(adapterRelawan);
-//                }
-//
-//            }
-//        });
+//        final MutableLiveData<ResponseListRelawan> liveData = new MutableLiveData<>();
+
+        view_listrelawan view_listrelawan = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(view_listrelawan.class);
+        view_listrelawan.setListRelawanData();
+        view_listrelawan.getListRelawanData().observe(getViewLifecycleOwner(), new Observer<ResponseListRelawan>() {
+            @Override
+            public void onChanged(ResponseListRelawan responseListRelawan) {
+                adapterRelawan.getFilter().filter(query);
+                adapterRelawan = new AdapterRelawan(listRelawan, getActivity());
+                recyclerView.setAdapter(adapterRelawan);
+            }
+        });
     }
 
     @Override

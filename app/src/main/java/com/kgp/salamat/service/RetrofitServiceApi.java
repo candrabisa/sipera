@@ -21,4 +21,11 @@ public class RetrofitServiceApi {
                 .client(okHttpClient)
                 .build();
     }
+//    public static Retrofit getRetrofitService2() {
+//        return new Retrofit.Builder()
+//                .baseUrl(Api.BASE_URL_RELAWAN)
+//                .addConverterFactory(gsonConverterFactory)
+//                .client(okHttpClient)
+//                .build();
+//    }
 }

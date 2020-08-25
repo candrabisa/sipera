@@ -1,11 +1,9 @@
 package com.kgp.salamat.relawan;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -20,8 +18,6 @@ import com.kgp.salamat.api.ApiService;
 import com.kgp.salamat.model.ResponseListRelawan;
 import com.kgp.salamat.service.RetrofitServiceApi;
 import com.kgp.salamat.view.view_listrelawan;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;

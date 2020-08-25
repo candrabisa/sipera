@@ -4,13 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.kgp.salamat.api.Api;
 import com.kgp.salamat.api.ApiService;
 import com.kgp.salamat.model.ResponseListRelawan;
 import com.kgp.salamat.service.RetrofitServiceApi;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

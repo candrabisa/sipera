@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,7 +26,8 @@ public class AdapterRelawan extends RecyclerView.Adapter<AdapterRelawan.ViewHold
         this.context = context;
     }
 
-    private final List<RelawanItem>relawanItems;
+    private List<RelawanItem>relawanItems;
+    private List<RelawanItem>RelawanItemFull;
     private final Context context;
 
 
@@ -38,21 +41,54 @@ public class AdapterRelawan extends RecyclerView.Adapter<AdapterRelawan.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull AdapterRelawan.ViewHolder holder, int position) {
+        //get data
+        final String relawanID = relawanItems.get(position).getIdRelawan();
+        final String relawanNama = relawanItems.get(position).getNamaLengkap();
+        final String relawanHP = relawanItems.get(position).getNoHp();
+        final String relawanTPS = relawanItems.get(position).getTps();
 
-        holder.tvNama.setText(String.valueOf(relawanItems.get(position).getNamaLengkap()));
-        holder.tvHP.setText(String.valueOf(relawanItems.get(position).getNoHp()));
-        holder.tvTPS.setText(String.valueOf(relawanItems.get(position).getTps()));
-//=======
-//        holder.tvNama.setText(String.valueOf(relawanList.get(position).getAttributesRelawan().getNama_lengkap()));
-//        holder.tvHP.setText(String.valueOf(relawanList.get(position).getAttributesRelawan().getNo_hp()));
-//        holder.tvTPS.setText(String.valueOf(relawanList.get(position).getAttributesRelawan().getTps()));
-//>>>>>>> Stashed changes
+        //set data
+        holder.tvNama.setText(relawanNama);
+        holder.tvHP.setText(relawanHP);
+        holder.tvTPS.setText(relawanTPS);
     }
 
     @Override
     public int getItemCount() {
         return relawanItems.size();
     }
+
+    public Filter getFilter(){
+        return relawanFilter;
+    }
+    private Filter relawanFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<RelawanItem> filteredList = new ArrayList<>();
+            if (charSequence == null || charSequence.length() == 0){
+                filteredList.addAll(relawanItems);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (RelawanItem item : relawanItems){
+                    if (item.getNamaLengkap().toLowerCase().contains(filterPattern) ||
+                            item.getTps().toLowerCase().contains(filterPattern) ||
+                            item.getNoHp().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            relawanItems.clear();
+//            relawanItems.addAll((List)filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         final TextView tvNama, tvHP, tvTPS;
