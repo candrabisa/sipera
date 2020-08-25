@@ -4,4 +4,5 @@ public class Api {
     public static final String BASE_URL_RELAWAN = "http://nakulasadewaindonesia.com/tikep/service/";
     public static final String ENDPOINT_LIST_RELAWAN = "relawan/ambilrelawan";
     public static final String ENDPOINT_LIST_PASLON = "paslon/ambilpaslon";
+    public static final String ENDPOINT_SPINNER_TPS = "tps/spinnertps";
 }

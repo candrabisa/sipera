@@ -110,9 +110,10 @@
                     android:layout_width="300dp"
                     android:layout_height="40dp"
                     android:background="@drawable/spinner"
-                    app:hintText="Prov/Kab/Kec/Kel/NamaTPS/"
-                    android:entries="@array/list_tps"
+                    app:hintText="Pilih TPS tempat bertugas"
                     android:layout_gravity="center"/>
+<!--                android:entries="@array/list_tps"-->
+
             </LinearLayout>
 
             <LinearLayout
