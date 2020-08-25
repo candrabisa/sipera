@@ -67,21 +67,11 @@ public class ListRelawan extends AppCompatActivity implements SwipeRefreshLayout
                     tvEmpty.setVisibility(View.VISIBLE);
                     refreshing(false);
                 } else {
-                    Log.d(TAG, "cek list relawan: "+responseListRelawan);
-                 //   adapterRelawan.setRelawanList(responseListRelawan);
+
                     refreshing(false);
                 }
             }
-//            @Override
-//            public void onChanged(ArrayList<ModelListRelawan> modelListRelawans) {
-//                if (modelListRelawans == null){
-//                    tvEmpty.setVisibility(View.VISIBLE);
-//                    refreshing(false);
-//                } else {
-//                    adapterRelawan.setRelawanList(modelListRelawans);
-//                    refreshing(false);
-//                }
-//            }
+
         });
     }
     private void ambilData() {

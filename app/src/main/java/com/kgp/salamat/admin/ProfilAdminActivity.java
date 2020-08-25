@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.kgp.salamat.LoginActivity;
 import com.kgp.salamat.R;
 import com.kgp.salamat.admin.Add.UbahProfileActivity;
 import com.kgp.salamat.admin.Detail.DetailTpsActivity;
+
+import static com.kgp.salamat.LoginActivity.sharedprefren;
 
 public class ProfilAdminActivity extends AppCompatActivity {
 
@@ -20,5 +23,12 @@ public class ProfilAdminActivity extends AppCompatActivity {
 
     public void UbahProfileAdmin(View view) {
         startActivity(new Intent(ProfilAdminActivity.this, UbahProfileActivity.class));
+    }
+
+    public void Keluar(View view) {
+        getSharedPreferences(sharedprefren, 0).edit().clear().commit();
+        Intent intentRegister = new Intent(ProfilAdminActivity.this, LoginActivity.class);
+        startActivity(intentRegister);
+        finish();
     }
 }

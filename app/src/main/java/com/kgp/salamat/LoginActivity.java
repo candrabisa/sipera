@@ -1,10 +1,8 @@
 package com.kgp.salamat;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,41 +12,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.kgp.salamat.util.Server;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.kgp.salamat.admin.AdminActivity;
+import com.kgp.salamat.admin.Helper.RequestHAndler;
+import com.kgp.salamat.api.Api;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText etUsername, etPassword;
     Button btn_login;
     TextView tv_register;
-    ProgressDialog progressDialog;
+    String user,pass;
+    ProgressDialog progressDialog2;
+    public static final String sharedprefren ="*hjshduundl*ldllkk";
+    public static String useremail = "@gmail";
+    String passss="psjdsojhd*";
 
-    int success;
-    ConnectivityManager conMgr;
-    private String url = Server.URL + "login.php";
-
-    private static final String TAG = LoginActivity.class.getSimpleName();
-    private static final String TAG_SUCCESS = "success";
-    private static final String TAG_MESSAGE = "message";
-
-    public final static String TAG_EMAIL = "email";
-    public final static String TAG_PASSWORD = "password";
-
-    String tag_json_obj = "json_obj_req";
-
-    SharedPreferences sharedPreferences;
-    Boolean session = false;
-    String email, password;
-
-    public static final String my_shared_preferences = "my_shared_preferences";
-    public static final String session_status = "session_status";
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +47,21 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         tv_register = findViewById(R.id.btn_register);
 
+        loadDaata();
+        if(user.equals(null) || pass.equals(null)){
+
+        }else {
+
+            etUsername.setText(user);
+            etPassword.setText(pass);
+            mlebet();
+        }
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentLogin = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intentLogin);
-                finish();
+
+                mlebet();
             }
         });
 
@@ -78,115 +74,92 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-//        conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-//        if (conMgr.getActiveNetworkInfo() !=null
-//                && conMgr.getActiveNetworkInfo().isAvailable()
-//                && conMgr.getActiveNetworkInfo().isConnected()){
-//        } else{
-//            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
-//        }
-//        // cek session login jika True maka langsung kebuka
-//        sharedPreferences = getSharedPreferences(my_shared_preferences, Context.MODE_PRIVATE);
-//        session = sharedPreferences.getBoolean(session_status, false);
-//        email = sharedPreferences.getString(TAG_EMAIL, null);
-//        password = sharedPreferences.getString(TAG_PASSWORD, null);
-//
-//        if (session) {
-//            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//            intent.putExtra(TAG_EMAIL, email);
-//            intent.putExtra(TAG_PASSWORD, password);
-//            startActivity(intent);
-//            finish();
-//        }
-//        btn_login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String email = etUsername.getText().toString();
-//                String password = etPassword.getText().toString();
-//
-//                // mengecek kolom kosong
-//                if (email.trim().length()>0 && password.trim().length()>0){
-//                    if (conMgr.getActiveNetworkInfo() != null
-//                    && conMgr.getActiveNetworkInfo().isAvailable()
-//                    && conMgr.getActiveNetworkInfo().isConnected()){
-//                        checkLogin(email, password);
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
-//                    }
-//                } else{
-//                    Toast.makeText(getApplicationContext(), "Mohon isi semua kolom", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-//    }
-//    private void checkLogin(final String email, final String password){
-//        progressDialog = new ProgressDialog(this);
-//        progressDialog.setCancelable(false);
-//        progressDialog.setMessage("Loggin in..");
-//        showDialog();
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.e(TAG, "Login Response: " + response.toString());
-//                hideDialog();
-//                try {
-//                    JSONObject jsonObject = new JSONObject(response);
-//                    success = jsonObject.getInt(TAG_SUCCESS);
-//
-//                    //check for error node in json
-//                    if (success == 1) {
-//                        String email = jsonObject.getString(TAG_EMAIL);
-//                        String password = jsonObject.getString(TAG_PASSWORD);
-//
-//                        Log.e("Sucessfullt Login", jsonObject.toString());
-//                        Toast.makeText(getApplicationContext(), jsonObject.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
-//
-//                        // Menyimpan login ke session
-//                        SharedPreferences.Editor editor = sharedPreferences.edit();
-//                        editor.putBoolean(session_status, true);
-//                        editor.putString(TAG_EMAIL, email);
-//                        editor.putString(TAG_PASSWORD, password);
-//                        editor.apply();
-//
-//                        // Memanggil main activity
-//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                        intent.putExtra(TAG_EMAIL, email);
-//                        intent.putExtra(TAG_PASSWORD, password);
-//                        startActivity(intent);
-//                        finish();
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), jsonObject.getString(TAG_MESSAGE), Toast.LENGTH_LONG).show();
-//                    }
-//                } catch (JSONException e) {
-//                    //json error
-//                    e.printStackTrace();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.e(TAG, "LOGIN Error: " + error.getMessage());
-//                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-//                hideDialog();
-//            }
-//        }) {
-//            @Override
-//            protected Map<String, String> getParams(){
-//                // posting parameters to login url
-//                Map<String, String>params = new HashMap<String, String>();
-//                params.put("email", email);
-//                params.put("password", password);
-//
-//                return params;
-//            }
-//        };
-//        // Adding Request to request queue
-//        AppController.getInstance().addToRequestQueue(stringRequest, tag_json_obj);
-//    }
-//    private void showDialog(){
-//        if (!progressDialog.isShowing()) progressDialog.show();
-//    }
-//    private void hideDialog(){
-//        if (progressDialog.isShowing()) progressDialog.dismiss();
+
     }
+   public void mlebet(){
+        user =etUsername.getText().toString();
+        pass = etPassword.getText().toString();
+        if(user.equals("")){
+            etUsername.setError("Username kosong");
+        }else if(pass.equals("")) {
+            etPassword.setError("Password kosong");
+        }else{
+            progressDialog2 = new ProgressDialog(LoginActivity.this);
+            progressDialog2.setMessage("Tunggu sebentar...");
+            progressDialog2.setCancelable(false);
+            progressDialog2.show();
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, Api.ENDPOINT_LOGIN+"?user="+user+"&password="+pass, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d(TAG, "cekrespon: "+response);
+                    try {
+                        JSONObject result = new JSONObject(response);
+                        String status = result.getString("status");
+                        String level = result.getString("level");
+                        String username = result.getString("user");
+                        Log.d(TAG, "status: "+status);
+                        if(status.equals("true")){
+                            if(level.equals("admin")){
+                                saveData();
+                                Intent intentLogin = new Intent(LoginActivity.this, AdminActivity.class);
+                                startActivity(intentLogin);
+                                finish();
+
+                            }else if(level.equals("relawan")){
+                                saveData();
+                                Intent intentLogin = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intentLogin);
+                                finish();
+
+                            }
+                        }else {
+                            Toast.makeText(LoginActivity.this, "Username atau password salah", Toast.LENGTH_SHORT).show();
+                            progressDialog2.dismiss();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(LoginActivity.this, "Username atau password salah", Toast.LENGTH_SHORT).show();
+                        progressDialog2.dismiss();
+                    }
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(LoginActivity.this, "Terjadi masalah di server", Toast.LENGTH_SHORT).show();
+                    progressDialog2.dismiss();
+                }
+            }){
+
+            };
+            RequestHAndler.getInstance(LoginActivity.this).addToRequestQueue(stringRequest);
+        }
+
+   }
+    public void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(sharedprefren,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(useremail,user);
+        editor.putString(passss,pass);
+        editor.apply();
+    }
+
+    public void babad(){
+        SharedPreferences preferences = getSharedPreferences(sharedprefren, MODE_PRIVATE);
+        preferences.edit().remove(useremail).commit();
+        preferences.edit().remove(passss).commit();
+    }
+
+    public  void loadDaata(){
+        SharedPreferences sharedPreferences = getSharedPreferences(sharedprefren,MODE_PRIVATE);
+        user = sharedPreferences.getString(useremail,"");
+        pass = sharedPreferences.getString(passss,"");
+
+        Log.d(TAG, "cek user:  "+user +pass);
+
+    }
+
 }
+

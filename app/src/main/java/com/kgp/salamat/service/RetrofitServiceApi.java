@@ -16,7 +16,7 @@ public class RetrofitServiceApi {
             .build();
     public static Retrofit getRetrofitService(){
         return new Retrofit.Builder()
-                .baseUrl(Api.BASE_URL_RELAWAN)
+                .baseUrl(Api.BASE_URL)
                 .addConverterFactory(gsonConverterFactory)
                 .client(okHttpClient)
                 .build();

@@ -21,4 +21,5 @@ public interface ApiService {
 
     @GET(Api.ENDPOINT_SPINNER_TPS)
     Call<ResponseSpinnerTps> getspinnertps();
+
 }

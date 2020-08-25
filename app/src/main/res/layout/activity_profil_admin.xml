@@ -94,18 +94,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <Button
-                android:id="@+id/button2"
-                android:clickable="true"
-                android:onClick="UbahProfileAdmin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/button9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
                 android:background="@drawable/btnok"
+                android:clickable="true"
+                android:onClick="UbahProfileAdmin"
                 android:text="Ubah Profile"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/btncancel"
+                android:clickable="true"
+                android:onClick="Keluar"
+                android:text="LogOut"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 
