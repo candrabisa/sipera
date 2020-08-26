@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.google.android.material.chip.ChipGroup;
 import com.kgp.salamat.R;
 import com.kgp.salamat.adapter.AdapterRelawan;
+import com.kgp.salamat.api.Api;
 import com.kgp.salamat.api.ApiService;
 import com.kgp.salamat.model.RelawanItem;
 import com.kgp.salamat.model.ResponseListRelawan;
@@ -73,7 +74,7 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
 
         adapterRelawan = new AdapterRelawan(listRelawan,getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        loadRelawanData();
         recyclerView.setAdapter(adapterRelawan);
         
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshListRelawan);
@@ -89,7 +90,6 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
             private static final String TAG = "fragment_relawan";
             @Override
             public void onChanged(ResponseListRelawan responseListRelawan) {
-                listRelawan.clear();
                 progressBar.setVisibility(View.VISIBLE);
                 if (responseListRelawan == null){
                     tvEmpty.setVisibility(View.VISIBLE);
@@ -142,60 +142,28 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if (!query.equals("")){
+                    adapterRelawan.getFilter().filter(query);
+                    adapterRelawan = new AdapterRelawan(listRelawan, getActivity());
+                    recyclerView.setAdapter(adapterRelawan);
+                    adapterRelawan.notifyDataSetChanged();
+                } else {
+                    loadRelawanData();
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                if(!query.equals(query)) {
-                    searchUsers(query);
+                if (!query.equals("")){
+                    adapterRelawan.getFilter().filter(query);
+                    adapterRelawan = new AdapterRelawan(listRelawan, getActivity());
+                    recyclerView.setAdapter(adapterRelawan);
+                    adapterRelawan.notifyDataSetChanged();
                 } else {
-                    getAllUser();
+                    loadRelawanData();
                 }
                 return false;
-//                Retrofit retrofit = RetrofitServiceApi.getRetrofitService();
-//                ApiService apiService = retrofit.create(ApiService.class);
-//                Call<ResponseListRelawan> call = apiService.getListRelawan(query);
-//                call.enqueue(new Callback<ResponseListRelawan>() {
-//                    @Override
-//                    public void onResponse(Call<ResponseListRelawan> call, Response<ResponseListRelawan> response) {
-//                        List<RelawanItem> value = response.body().getRelawan();
-//                        if (value.equals("1")){
-////                    liveData.setValue((ResponseListRelawan)response.body().getRelawan());
-//                            listRelawan = response.body().getRelawan();
-//                            adapterRelawan = new AdapterRelawan(listRelawan, getContext());
-//                            adapterRelawan.notifyDataSetChanged();
-//                            adapterRelawan.getFilter().filter(query);
-//                            recyclerView.setAdapter(adapterRelawan);
-//
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<ResponseListRelawan> call, Throwable t) {
-//
-//                    }
-//                });
-//                return false;
-            }
-        });
-    }
-
-    private void getAllUser() {
-        loadRelawanData();
-    }
-
-    private void searchUsers(String query) {
-//        final MutableLiveData<ResponseListRelawan> liveData = new MutableLiveData<>();
-
-        view_listrelawan view_listrelawan = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(view_listrelawan.class);
-        view_listrelawan.setListRelawanData();
-        view_listrelawan.getListRelawanData().observe(getViewLifecycleOwner(), new Observer<ResponseListRelawan>() {
-            @Override
-            public void onChanged(ResponseListRelawan responseListRelawan) {
-                adapterRelawan.getFilter().filter(query);
-                adapterRelawan = new AdapterRelawan(listRelawan, getActivity());
-                recyclerView.setAdapter(adapterRelawan);
             }
         });
     }
