@@ -47,52 +47,88 @@
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
-            <EditText
-                android:id="@+id/etReg_NIK"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:hint="@string/nik_ktp"
-                android:inputType="number"/>
-            <EditText
-                android:layout_marginTop="5dp"
-                android:id="@+id/etReg_NamaLengkap"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:hint="@string/nama_lengkap"/>
-            <EditText
-                android:id="@+id/etReg_Alamat"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                android:hint="@string/alamat" />
-            <EditText
-                android:id="@+id/etReg_NoHP"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                android:hint="@string/no_hp"
-                android:inputType="number"/>
-            <EditText
-                android:id="@+id/etReg_Email"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress"/>
-            <EditText
-                android:id="@+id/etReg_Password"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                android:hint="@string/prompt_password"
-                android:inputType="textPassword"/>
-            <EditText
-                android:id="@+id/etReg_Password2"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                android:hint="@string/ulangi_password"
-                android:inputType="textPassword"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <EditText
+                    android:id="@+id/etReg_NIK"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:hint="@string/nik_ktp"
+                    android:inputType="number"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <EditText
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/etReg_NamaLengkap"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:hint="@string/nama_lengkap"/>
+            </com.google.android.material.textfield.TextInputLayout>
+           <com.google.android.material.textfield.TextInputLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:gravity="center">
+               <EditText
+                   android:id="@+id/etReg_Alamat"
+                   android:layout_width="300dp"
+                   android:layout_height="40dp"
+                   android:layout_marginTop="5dp"
+                   android:hint="@string/alamat" />
+           </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <EditText
+                    android:id="@+id/etReg_NoHP"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:hint="@string/no_hp"
+                    android:inputType="number"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <EditText
+                    android:id="@+id/etReg_Email"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:hint="@string/prompt_email"
+                    android:inputType="textEmailAddress"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <EditText
+                    android:id="@+id/etReg_Password"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:hint="@string/prompt_password"
+                    android:inputType="textPassword"
+                    android:autofillHints="@string/prompt_password" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <EditText
+                    android:id="@+id/etReg_Password2"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:hint="@string/ulangi_password"
+                    android:inputType="textPassword"/>
+            </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -124,7 +160,7 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:id="@+id/iv_Profil"
+                    android:id="@+id/iv_RegFotoKTP"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:adjustViewBounds="true"
