@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kgp.salamat.api.ApiService;
+import com.kgp.salamat.model.ResponseRegister;
 import com.kgp.salamat.model.ResponseSpinnerTps;
 import com.kgp.salamat.model.SpinnerItem;
 import com.kgp.salamat.service.RetrofitServiceApi;
@@ -45,7 +47,7 @@ import retrofit2.Response;
 public class SignUpActivity extends AppCompatActivity {
     SearchableSpinner spinner;
     Button btnRegister, btnRegUpload;
-    EditText etReg_NIK, etReg_Nama, etReg_Alamat, etReg_NoHP, etReg_Email, etReg_Password;
+    EditText etReg_NIK, etReg_Nama, etReg_Alamat, etReg_NoHP, etReg_Email, etReg_Password, etReg_UlangiPassword;
     TextView tvReg_Login;
     ImageView ivReg_KTP;
     private List<String>listspineralamat = new ArrayList<>();
@@ -58,8 +60,6 @@ public class SignUpActivity extends AppCompatActivity {
     private static final int IMAGE_PICK_GALLERY_REQUEST_CODE = 300;
     private static final int IMAGE_PICK_CAMERA_REQUEST_CODE = 400;
 
-    //deklarasi tempat penyimpanan foto profil dan cover
-    private String storagePath = "users_profile_cover_img/";
 
     //arrays of permissions to be request
     private String cameraPermissions[];
@@ -84,6 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
         etReg_NoHP = findViewById(R.id.etReg_NoHP);
         etReg_Email= findViewById(R.id.etReg_Email);
         etReg_Password = findViewById(R.id.etReg_Password);
+        etReg_UlangiPassword = findViewById(R.id.etReg_Password2);
         tvReg_Login = findViewById(R.id.btnReg_Login);
 
         cameraPermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
@@ -107,6 +108,83 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ambilGambar();
+            }
+        });
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nik = etReg_NIK.getText().toString().trim();
+                String nama_lengkap = etReg_Nama.getText().toString().trim();
+                String alamat = etReg_Alamat.getText().toString().trim();
+                String no_hp = etReg_NoHP.getText().toString().trim();
+                String email = etReg_Email.getText().toString().trim();
+                String pass = etReg_Password.getText().toString().trim();
+                String confirmpass = etReg_UlangiPassword.getText().toString().trim();
+
+//                ImageView ktp = ivReg_KTP.
+
+                if (nik.isEmpty()){
+                    etReg_NIK.setError("NIK belum diisi");
+                    etReg_NIK.requestFocus();
+                    return;
+                } else if(nik.length()<16){
+                    etReg_NIK.setError("NIK KTP Harus memiliki 16 angka");
+                    etReg_NIK.requestFocus();
+                } else if (nama_lengkap.isEmpty()) {
+                    etReg_Nama.setError("Nama belum diisi");
+                    etReg_Nama.requestFocus();
+                    return;
+                } else if (alamat.isEmpty()){
+                    etReg_Alamat.setError("Alamat belum diisi");
+                    etReg_Alamat.requestFocus();
+                    return;
+                } else if (no_hp.isEmpty()){
+                    etReg_NoHP.setError("No HP belum diisi");
+                    etReg_NoHP.requestFocus();
+                    return;
+                } else if (no_hp.length()<10){
+                    etReg_NoHP.setError("No HP setidaknya memiliki 11 angka");
+                    etReg_NoHP.requestFocus();
+                    return;
+                } else if (email.isEmpty()){
+                    etReg_Email.setError("Email belum diisi");
+                    etReg_Email.requestFocus();
+                    return;
+                } else if(pass.isEmpty()){
+                    etReg_Password.setError("Password belum diisi");
+                    etReg_Password.requestFocus();
+                    return;
+                } else if (pass.length()<6){
+                    etReg_Password.setError("Password harus 6-16 karakter");
+                    etReg_Password.requestFocus();
+                    return;
+                } else if (confirmpass.isEmpty()){
+                    etReg_UlangiPassword.setError("Ulangi password belum diisi");
+                    etReg_UlangiPassword.requestFocus();
+                    return;
+                } else if (!confirmpass.equals(pass)){
+                    etReg_UlangiPassword.setError("Password tidak sesuai");
+                    etReg_UlangiPassword.requestFocus();
+                    return;
+                } else {
+                    Call<ResponseRegister> call = RetrofitServiceApi.getApi().postRegisterRelawan(nik, nama_lengkap, alamat, no_hp, email, pass);
+                    call.enqueue(new Callback<ResponseRegister>() {
+                        @Override
+                        public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
+                            if (response.body().isEror() == false){
+                                startActivity( new Intent(SignUpActivity.this, LoginActivity.class));
+                                Toast.makeText(SignUpActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(SignUpActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseRegister> call, Throwable t) {
+                            Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         });
     }
@@ -191,8 +269,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void ambilDariGaleri() {
-        Intent intentGaleri = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//        intentGaleri.setType("url_images/*");
+        Intent intentGaleri = new Intent(Intent.ACTION_PICK);
+        intentGaleri.setType("image/*");
         startActivityForResult(intentGaleri, IMAGE_PICK_GALLERY_REQUEST_CODE);
     }
 

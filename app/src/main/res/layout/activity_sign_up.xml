@@ -56,7 +56,8 @@
                     android:layout_width="300dp"
                     android:layout_height="40dp"
                     android:hint="@string/nik_ktp"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:maxLength="16"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -115,7 +116,8 @@
                     android:layout_marginTop="5dp"
                     android:hint="@string/prompt_password"
                     android:inputType="textPassword"
-                    android:autofillHints="@string/prompt_password" />
+                    android:autofillHints="@string/prompt_password"
+                    android:maxLength="16"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -127,7 +129,8 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
                     android:hint="@string/ulangi_password"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:maxLength="16"/>
             </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
                 android:layout_width="match_parent"

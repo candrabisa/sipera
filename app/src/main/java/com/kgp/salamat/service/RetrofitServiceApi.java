@@ -1,6 +1,7 @@
 package com.kgp.salamat.service;
 
 import com.kgp.salamat.api.Api;
+import com.kgp.salamat.api.ApiService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,6 +10,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitServiceApi {
+    private Retrofit retrofit;
     private static final GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create();
     private static final OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
@@ -20,5 +22,9 @@ public class RetrofitServiceApi {
                 .addConverterFactory(gsonConverterFactory)
                 .client(okHttpClient)
                 .build();
+    }
+
+    public static ApiService getApi(){
+        return getRetrofitService().create(ApiService.class);
     }
 }
