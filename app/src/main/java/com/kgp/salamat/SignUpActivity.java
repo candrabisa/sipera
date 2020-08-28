@@ -15,9 +15,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +32,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.kgp.salamat.api.ApiService;
 import com.kgp.salamat.model.ResponseRegister;
 import com.kgp.salamat.model.ResponseSpinnerTps;
@@ -36,8 +40,16 @@ import com.kgp.salamat.model.SpinnerItem;
 import com.kgp.salamat.service.RetrofitServiceApi;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -68,8 +80,9 @@ public class SignUpActivity extends AppCompatActivity {
     //uri picked image
     private Uri image_uri;
 
-    //Check foto profil atau cover
-    private String profileOrCoverPhoto;
+    //image resolution
+    int bitmap_size = 40; // image quality 1-100;
+    int max_resolution_image = 800;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +91,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         btnRegister = findViewById(R.id.btn_Reg);
         btnRegUpload = findViewById(R.id.btnReg_Upload);
+        ivReg_KTP = (ImageView) findViewById(R.id.iv_RegFotoKTP);
         etReg_NIK = findViewById(R.id.etReg_NIK);
         etReg_Nama = findViewById(R.id.etReg_NamaLengkap);
         etReg_Alamat = findViewById(R.id.etReg_Alamat);
@@ -107,7 +121,11 @@ public class SignUpActivity extends AppCompatActivity {
         btnRegUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ambilGambar();
+                ImagePicker.Companion.with(SignUpActivity.this)
+                        .crop()
+                        .compress(1024)
+                        .maxResultSize(1080, 1080)
+                        .start();
             }
         });
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -244,7 +262,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void ambilGambar(){
-        String options[] = {"kamera", "Galeri"};
+        ivReg_KTP.setImageResource(0);
+        String options[] = {"kamera", "Galeri", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pilih foto dari");
         builder.setItems(options, new DialogInterface.OnClickListener() {
@@ -262,6 +281,8 @@ public class SignUpActivity extends AppCompatActivity {
                     } else {
                         ambilDariGaleri();
                     }
+                } else if (i == 2){
+                    dialogInterface.dismiss();
                 }
             }
         });
@@ -271,18 +292,20 @@ public class SignUpActivity extends AppCompatActivity {
     private void ambilDariGaleri() {
         Intent intentGaleri = new Intent(Intent.ACTION_PICK);
         intentGaleri.setType("image/*");
-        startActivityForResult(intentGaleri, IMAGE_PICK_GALLERY_REQUEST_CODE);
+        intentGaleri.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intentGaleri, "Pilih Gambar"), IMAGE_PICK_GALLERY_REQUEST_CODE);
     }
 
     private void ambilDariCamera() {
-        Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
-        startActivityForResult(intentCamera, IMAGE_PICK_CAMERA_REQUEST_CODE);
-
         ContentValues contentValues = new ContentValues();
         contentValues.put(MediaStore.Images.Media.TITLE, "Temp Pic");
         contentValues.put(MediaStore.Images.Media.DESCRIPTION, "Temp Description");
         image_uri = SignUpActivity.this.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+
+        Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        image_uri = getOutputMediaFileUri();
+        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
+        startActivityForResult(intentCamera, IMAGE_PICK_CAMERA_REQUEST_CODE);
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -315,31 +338,68 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
-        if (requestCode == IMAGE_PICK_CAMERA_REQUEST_CODE){
-            if (resultCode == Activity.RESULT_OK){
-                assert data != null;
-                image_uri = data.getData();
+        if (resultCode == Activity.RESULT_OK){
+            Log.e("onActivityResult", "requestCode" + requestCode + ", resultCode" + resultCode );
+            if (requestCode == IMAGE_PICK_CAMERA_REQUEST_CODE){
+                try {
+                    Log.e("CAMERA", image_uri.getPath());
+                    image_uri.getPath();
+                    ivReg_KTP.setImageURI(image_uri);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
 
             }
-        } if (requestCode == IMAGE_PICK_GALLERY_REQUEST_CODE){
-            if (resultCode == Activity.RESULT_OK){
-                assert data !=null;
-                image_uri = data.getData();
-                String[]filePathColumn = {MediaStore.Images.Media.DATA};
-
-                Cursor cursor = getContentResolver().query(image_uri, filePathColumn, null, null, null);
-                cursor.moveToFirst();
-
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String picturesPath = cursor.getString(columnIndex);
-                cursor.close();
-
-                ivReg_KTP = findViewById(R.id.iv_RegFotoKTP);
-                ivReg_KTP.setImageBitmap(BitmapFactory.decodeFile(picturesPath));
+        } else if (requestCode == IMAGE_PICK_GALLERY_REQUEST_CODE && data !=null && data.getData() !=null){
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(SignUpActivity.this.getContentResolver(), data.getData());
+                setToImageView(getResizedBitmap(bitmap, max_resolution_image));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void setToImageView(Bitmap bmp) {
+        //compress image
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, bitmap_size, bytes);
+        Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(bytes.toByteArray()));
+        ivReg_KTP.setImageBitmap(decoded);
+    }
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize){
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio>1){
+            width = maxSize;
+            height = (int) (width/ bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (width / bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+    public Uri getOutputMediaFileUri(){
+        return Uri.fromFile(getOutputMediaFile());
+    }
+
+    private static File getOutputMediaFile() {
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "DeKa");
+        if (!mediaStorageDir.exists()){
+            if (!mediaStorageDir.mkdirs()){
+                Log.e("Monitoring", "Ops! Gagal membuat monitoring");
+                return null;
+            }
+        }
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmms", Locale.getDefault()).format(new Date());
+        File mediaFile;
+        mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_DeKa_" + timeStamp + ".jpg");
+        return mediaFile;
     }
 }

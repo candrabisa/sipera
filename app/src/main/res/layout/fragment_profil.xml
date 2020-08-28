@@ -37,7 +37,7 @@
                     android:layout_height="100dp"
                     android:src="@drawable/pendukung"/>
                 <TextView
-                    android:id="@+id/tv_NamaRelawan"
+                    android:id="@+id/tvProfil_NamaRelawan"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:text="Nama Relawan"
@@ -84,6 +84,12 @@
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:hint="@string/no_hp"
+                android:enabled="false"/>
+            <EditText
+                android:id="@+id/etProfil_email"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:hint="@string/prompt_email"
                 android:enabled="false"/>
             <EditText
                 android:id="@+id/etProfil_tps"

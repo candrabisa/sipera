@@ -11,6 +11,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitServiceApi {
     private Retrofit retrofit;
+    private static RetrofitServiceApi mInstance;
+
     private static final GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create();
     private static final OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
@@ -22,6 +24,13 @@ public class RetrofitServiceApi {
                 .addConverterFactory(gsonConverterFactory)
                 .client(okHttpClient)
                 .build();
+    }
+
+    public static synchronized RetrofitServiceApi getInstance() {
+        if (mInstance == null) {
+            mInstance = new RetrofitServiceApi();
+        }
+        return mInstance;
     }
 
     public static ApiService getApi(){
