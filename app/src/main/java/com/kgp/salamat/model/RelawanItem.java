@@ -3,11 +3,50 @@ package com.kgp.salamat.model;
 import com.google.gson.annotations.SerializedName;
 
 public class RelawanItem{
-	public void setNik(String nik) {
+
+//    public RelawanItem(String nik, String idRelawan, String cdd, String noHp, String email, String alamat, String namaLengkap, String tps) {
+//        this.nik = nik;
+//        this.idRelawan = idRelawan;
+//        this.cdd = cdd;
+//        this.noHp = noHp;
+//        this.tps = tps;
+//        this.namaLengkap = namaLengkap;
+//        this.email = email;
+//        this.urlProfile = urlProfile;
+//        this.hash = hash;
+//        this.alamat = alamat;
+//        this.urlImage = urlImage;
+//    }
+
+    public RelawanItem(String idRelawan, String nik, String namaLengkap, String alamat, String noHp, String email, String tps) {
+        this.idRelawan = idRelawan;
+        this.nik = nik;
+        this.namaLengkap = namaLengkap;
+        this.alamat = alamat;
+        this.noHp = noHp;
+        this.email = email;
+        this.tps = tps;
+    }
+
+//    public RelawanItem(String id_relawan, String nik, String nama_lengkap, String alamat) {
+//        this.nik = nik;
+//        this.idRelawan = idRelawan;
+//        this.cdd = cdd;
+//        this.noHp = noHp;
+//        this.tps = tps;
+//        this.namaLengkap = namaLengkap;
+//        this.email = email;
+//        this.urlProfile = urlProfile;
+//        this.hash = hash;
+//        this.alamat = alamat;
+//        this.urlImage = urlImage;
+//    }
+
+
+    public void setNik(String nik) {
 		this.nik = nik;
 	}
-
-	public void setIdRelawan( String idRelawan) {
+    public void setIdRelawan(String idRelawan) {
 		this.idRelawan = idRelawan;
 	}
 

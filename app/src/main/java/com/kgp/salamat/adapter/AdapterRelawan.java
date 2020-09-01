@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kgp.salamat.R;
+import com.kgp.salamat.fragment.fragment_relawan;
 import com.kgp.salamat.model.RelawanItem;
 import com.kgp.salamat.model.ResponseListRelawan;
 
@@ -85,7 +86,7 @@ public class AdapterRelawan extends RecyclerView.Adapter<AdapterRelawan.ViewHold
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
             relawanItems.clear();
-//            relawanItems.addAll((List)filterResults.values);
+            relawanItems.addAll((List<RelawanItem>)filterResults.values);
             notifyDataSetChanged();
         }
     };

@@ -1,6 +1,7 @@
 package com.kgp.salamat;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,12 +20,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.kgp.salamat.admin.AdminActivity;
 import com.kgp.salamat.admin.Helper.RequestHAndler;
 import com.kgp.salamat.api.Api;
+import com.kgp.salamat.model.RegisterItem;
+import com.kgp.salamat.model.RelawanItem;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
 public class LoginActivity extends AppCompatActivity {
+
 
     EditText etUsername, etPassword;
     Button btn_login;
@@ -34,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     public static final String sharedprefren ="*hjshduundl*ldllkk";
     public static String useremail = "@gmail";
     String passss="psjdsojhd*";
+
 
     private static final String TAG = "LoginActivity";
 
@@ -155,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
         preferences.edit().remove(passss).commit();
     }
 
-    public  void loadDaata(){
+    public void loadDaata(){
         SharedPreferences sharedPreferences = getSharedPreferences(sharedprefren,MODE_PRIVATE);
         user = sharedPreferences.getString(useremail,"");
         pass = sharedPreferences.getString(passss,"");

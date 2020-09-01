@@ -2,6 +2,7 @@ package com.kgp.salamat.fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,10 +13,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.kgp.salamat.LoginActivity;
 import com.kgp.salamat.R;
 import com.kgp.salamat.SignUpActivity;
+import com.kgp.salamat.adapter.AdapterRelawan;
+import com.kgp.salamat.model.RelawanItem;
+import com.kgp.salamat.model.ResponseListRelawan;
+import com.kgp.salamat.service.RetrofitServiceApi;
+import com.kgp.salamat.storage.SharedPrefManager;
+
+import java.util.List;
+
+import retrofit2.Call;
 
 import static com.kgp.salamat.LoginActivity.sharedprefren;
 import static com.kgp.salamat.LoginActivity.useremail;
@@ -25,10 +38,16 @@ import static com.kgp.salamat.LoginActivity.useremail;
  */
 public class fragment_profil extends Fragment {
 
+    private AdapterRelawan adapterRelawan;
+    private List<RelawanItem> relawanItems;
+
     public fragment_profil() {
         // Required empty public constructor
     }
 
+    private TextView nama_lengkap;
+    private EditText nik, alamat, no_hp, email, pass, tps;
+    private ImageView imageView;
     Button btnmetu;
 
     @Override
@@ -45,6 +64,21 @@ public class fragment_profil extends Fragment {
 
             }
         });
+
+        nik = view.findViewById(R.id.etProfil_nik);
+        nama_lengkap = view.findViewById(R.id.tvProfil_NamaRelawan);
+        alamat = view.findViewById(R.id.etProfil_Alamat);
+        no_hp = view.findViewById(R.id.etProfil_nohp);
+        email = view.findViewById(R.id.etProfil_email);
+
+        nik.setText(SharedPrefManager.getInstance(getContext()).getUser().getNik());
+        nama_lengkap.setText(SharedPrefManager.getInstance(getContext()).getUser().getNamaLengkap());
+        alamat.setText(SharedPrefManager.getInstance(getContext()).getUser().getAlamat());
+        no_hp.setText(SharedPrefManager.getInstance(getContext()).getUser().getNoHp());
+        email.setText(SharedPrefManager.getInstance(getContext()).getUser().getEmail());
+
+//        Call<ResponseListRelawan> call = RetrofitServiceApi.getInstance().getApi().getListRelawan()
+
     }
 
 

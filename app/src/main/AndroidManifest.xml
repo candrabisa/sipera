@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +24,6 @@
         <activity android:name=".admin.DataTpsActivity" android:theme="@style/ThemaBiru"/>
         <activity android:name=".admin.Detail.DetailPaslonActivity" android:theme="@style/ThemaBiru"/>
         <activity android:name=".relawan.ProfilRelawanActivity" />
-        <activity android:name=".app.AppController" />
         <activity android:name=".relawan.InputSuaraActivity" />
         <activity android:name=".admin.Add.AddPaslonActivity" android:theme="@style/ThemaBiru" />
         <activity android:name=".admin.DataPaslonActivity" android:theme="@style/ThemaBiru"/>

@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.google.android.material.chip.ChipGroup;
 import com.kgp.salamat.R;
 import com.kgp.salamat.adapter.AdapterRelawan;
+import com.kgp.salamat.api.Api;
 import com.kgp.salamat.api.ApiService;
 import com.kgp.salamat.model.RelawanItem;
 import com.kgp.salamat.model.ResponseListRelawan;
@@ -36,10 +37,6 @@ import com.kgp.salamat.view.view_listrelawan;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,7 +67,7 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
 
         adapterRelawan = new AdapterRelawan(listRelawan,getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        loadRelawanData();
         recyclerView.setAdapter(adapterRelawan);
         
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshListRelawan);
@@ -86,7 +83,6 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
             private static final String TAG = "fragment_relawan";
             @Override
             public void onChanged(ResponseListRelawan responseListRelawan) {
-                listRelawan.clear();
                 progressBar.setVisibility(View.VISIBLE);
                 if (responseListRelawan == null){
                     tvEmpty.setVisibility(View.VISIBLE);
@@ -139,17 +135,29 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if (!query.equals("")){
+                    adapterRelawan.getFilter().filter(query);
+                    adapterRelawan = new AdapterRelawan(listRelawan, getActivity());
+                    recyclerView.setAdapter(adapterRelawan);
+                    adapterRelawan.notifyDataSetChanged();
+                } else {
+                    loadRelawanData();
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                if(!query.equals(query)) {
-                    searchUsers(query);
+                if (!query.equals("")){
+                    adapterRelawan.getFilter().filter(query);
+                    adapterRelawan = new AdapterRelawan(listRelawan, getActivity());
+                    recyclerView.setAdapter(adapterRelawan);
+                    adapterRelawan.notifyDataSetChanged();
                 } else {
-                    getAllUser();
+                    loadRelawanData();
                 }
                 return false;
+<<<<<<< HEAD
             }
         });
     }
@@ -168,6 +176,8 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
                 adapterRelawan.getFilter().filter(query);
                 adapterRelawan = new AdapterRelawan(listRelawan, getActivity());
                 recyclerView.setAdapter(adapterRelawan);
+=======
+>>>>>>> master
             }
         });
     }
