@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -143,6 +145,7 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
             public boolean onQueryTextChange(String query) {
                 if (!query.equals("")){
                     adapterRelawan.getFilter().filter(query);
+                    Log.d(TAG, "onQueryTextChange: "+query);
                     adapterRelawan = new AdapterRelawan(listRelawan, getActivity());
                     recyclerView.setAdapter(adapterRelawan);
                     adapterRelawan.notifyDataSetChanged();

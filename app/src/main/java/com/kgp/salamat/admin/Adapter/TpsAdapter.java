@@ -3,9 +3,11 @@ package com.kgp.salamat.admin.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,9 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kgp.salamat.R;
 import com.kgp.salamat.admin.Detail.DetailTpsActivity;
 import com.kgp.salamat.admin.Model.TpsItem;
+import com.kgp.salamat.model.RelawanItem;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TpsAdapter extends RecyclerView.Adapter<TpsAdapter.Holder> {
@@ -62,6 +66,7 @@ public class TpsAdapter extends RecyclerView.Adapter<TpsAdapter.Holder> {
     public int getItemCount() {
         return listtps.size();
     }
+
 
     public class Holder extends RecyclerView.ViewHolder {
         TextView tv_idtps,tv_namatps, tv_alamattps;

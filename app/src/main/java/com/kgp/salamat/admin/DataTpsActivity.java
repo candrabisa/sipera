@@ -1,6 +1,7 @@
 package com.kgp.salamat.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,10 +9,15 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.kgp.salamat.R;
+import com.kgp.salamat.adapter.AdapterRelawan;
 import com.kgp.salamat.admin.Adapter.TpsAdapter;
 import com.kgp.salamat.admin.Add.AddTpsActivity;
 import com.kgp.salamat.admin.Helper.RetroConfig;
@@ -31,6 +37,8 @@ public class DataTpsActivity extends AppCompatActivity {
     private List<TpsItem> listtps=new ArrayList<>();
     private RecyclerView.Adapter adapter;
     private static final String TAG = "DataTpsActivity";
+    private TpsAdapter adaptertps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +59,46 @@ public class DataTpsActivity extends AppCompatActivity {
     public void AddDataTps(View view) {
         startActivity(new Intent(DataTpsActivity.this, AddTpsActivity.class));
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.navcaritps,menu);
+        MenuItem item = menu.findItem(R.id.navcaritps);
+        android.widget.SearchView searchView = (android.widget.SearchView)item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                List<TpsItem>filtercatatan=fiterData(listtps, s);
+                rvTps.setAdapter(new TpsAdapter(DataTpsActivity.this,filtercatatan));
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                List<TpsItem>filtercatatan=fiterData(listtps, s);
+                rvTps.setAdapter(new TpsAdapter(DataTpsActivity.this,filtercatatan));
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+
+
+
+    }
+    private List<TpsItem> fiterData(List<TpsItem> catatansaya, String newQuery) {
+        String lowercase=newQuery.toLowerCase();
+        List<TpsItem>filterData=new ArrayList<>();
+        for (int i = 0; i < catatansaya.size(); i++) {
+            String text=catatansaya.get(i).getNamaTps().toLowerCase();
+            String tanggal=catatansaya.get(i).getAlamatTps().toLowerCase();
+            if(text.contains(lowercase)||tanggal.contains(lowercase)){
+                filterData.add(catatansaya.get(i));
+            }
+        }
+        return filterData;
+    };
 
     private void jumuttps() {
         final ProgressDialog loding = new ProgressDialog(DataTpsActivity.this);
