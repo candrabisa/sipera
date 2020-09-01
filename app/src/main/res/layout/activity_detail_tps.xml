@@ -13,83 +13,33 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Detail TPS"
-            android:textSize="23dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="20 Agsutus 2019" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/detailnamatps_admin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/detailnamatps_admin"
                 android:hint="Nama TPS" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/textVieaw6"
+            android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:text="Provinsi" />
-
-        <Spinner
-            android:id="@+id/detailspprovinsi_admin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:text="Alamat :" />
 
         <TextView
-            android:id="@+id/textVsdiew6"
+            android:id="@+id/id_alamatdetailtps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:text="Kabupaten" />
-
-        <Spinner
-            android:id="@+id/detailspkabupaten_admin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/textVaseiew6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:text="Kecamatan" />
-
-        <Spinner
-            android:id="@+id/detilspkecamatan_admin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:text="Kelurahan" />
-
-        <Spinner
-            android:id="@+id/detailspkeurahan_admin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:text="Alamat"
+            android:textSize="18dp" />
 
         <ImageView
             android:id="@+id/imageView3"
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:srcCompat="@drawable/tps" />
@@ -115,6 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
+                android:onClick="DeleteTPS"
                 android:layout_marginTop="17dp"
                 android:layout_weight="1"
                 android:background="@drawable/btncancel"
@@ -128,6 +79,7 @@
                 android:layout_margin="6dp"
                 android:layout_marginTop="17dp"
                 android:layout_weight="1"
+                android:onClick="UpdateTps"
                 android:background="@drawable/btnok"
                 android:text="Update TPS"
                 android:textColor="#FFFFFF" />

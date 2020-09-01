@@ -65,6 +65,7 @@ public class DataTpsActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.navcaritps,menu);
         MenuItem item = menu.findItem(R.id.navcaritps);
+        getSupportActionBar().setTitle("Data TPS");
         android.widget.SearchView searchView = (android.widget.SearchView)item.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

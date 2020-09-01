@@ -6,58 +6,50 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".admin.DataTpsActivity">
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="AddDataTps"
-        android:clickable="true"
-        android:layout_marginBottom="12dp"
-        android:layout_marginRight="12dp"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"
+        android:clickable="true"
+        android:onClick="AddDataTps"
+
+
+        app:backgroundTint="#673AB7"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/floatingActionButton"
         android:layout_alignParentRight="true"
 
 
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="90dp"
+        android:clickable="true"
+        android:onClick="AddDataTps"
+        app:backgroundTint="#8E1A1A"
+        app:srcCompat="@android:drawable/ic_lock_idle_lock" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Data TPS"
-            android:textSize="23dp"
-            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="20 Agsutus 2019" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginBottom="6dp"
-            android:background="@drawable/btnlock"
-            android:text="Lock TPS"
-            android:textColor="#FFFFFF" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rctpsadmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#FDFDFD"
             tools:listitem="@layout/item_tps">
 
         </androidx.recyclerview.widget.RecyclerView>
