@@ -15,8 +15,8 @@ public class RetrofitServiceApi {
 
     private static final GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create();
     private static final OkHttpClient okHttpClient = new OkHttpClient.Builder()
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(5, TimeUnit.SECONDS)
+            .connectTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
             .build();
     public static Retrofit getRetrofitService(){
         return new Retrofit.Builder()

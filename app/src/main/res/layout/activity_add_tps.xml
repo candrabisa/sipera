@@ -36,6 +36,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textCapWords"
+                android:id="@+id/namatps_add"
                 android:hint="Nama TPS" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -46,10 +48,13 @@
             android:layout_marginLeft="3dp"
             android:text="Provinsi" />
 
-        <Spinner
-            android:id="@+id/spinnser"
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/addspprov_admin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:hintText="Pilih provinsi" />
+
 
         <TextView
             android:id="@+id/textVsdiew6"
@@ -57,11 +62,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:text="Kabupaten" />
-
-        <Spinner
-            android:id="@+id/spinfdner"
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/addspkab_admin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:hintText="Pilih kabupaten" />
+
+
 
         <TextView
             android:id="@+id/textVaseiew6"
@@ -69,11 +77,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:text="Kecamatan" />
-
-        <Spinner
-            android:id="@+id/spinrrner"
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/addspkec_admin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:hintText="Pilih kecamatan" />
+
+
 
         <TextView
             android:id="@+id/textView6"
@@ -81,11 +92,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:text="Kelurahan" />
-
-        <Spinner
-            android:id="@+id/spinner"
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/addspkel_admin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:hintText="Pilih kelurahan/desa" />
+
 
         <ImageView
             android:id="@+id/imageView3"
@@ -115,6 +128,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:layout_marginTop="17dp"
+                android:onClick="Send"
+                android:clickable="true"
                 android:layout_weight="1"
                 android:background="@drawable/btnok"
                 android:text="Tambahkan TPS"
