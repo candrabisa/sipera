@@ -12,8 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,15 +21,10 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
-
-import com.google.android.material.chip.ChipGroup;
 import com.kgp.salamat.R;
 import com.kgp.salamat.adapter.AdapterRelawan;
-import com.kgp.salamat.api.Api;
-import com.kgp.salamat.api.ApiService;
 import com.kgp.salamat.model.RelawanItem;
 import com.kgp.salamat.model.ResponseListRelawan;
-import com.kgp.salamat.service.RetrofitServiceApi;
 import com.kgp.salamat.view.view_listrelawan;
 
 import java.util.ArrayList;
@@ -157,7 +150,7 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
                     loadRelawanData();
                 }
                 return false;
-<<<<<<< HEAD
+
             }
         });
     }
@@ -176,8 +169,7 @@ public class fragment_relawan extends Fragment implements SwipeRefreshLayout.OnR
                 adapterRelawan.getFilter().filter(query);
                 adapterRelawan = new AdapterRelawan(listRelawan, getActivity());
                 recyclerView.setAdapter(adapterRelawan);
-=======
->>>>>>> master
+
             }
         });
     }

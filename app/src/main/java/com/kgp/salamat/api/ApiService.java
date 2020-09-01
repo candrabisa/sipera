@@ -24,9 +24,7 @@ public interface ApiService {
     @GET(Api.ENDPOINT_SPINNER_TPS)
     Call<ResponseSpinnerTps> getspinnertps();
 
-<<<<<<< HEAD
 
-=======
 //    POST Register
     @FormUrlEncoded
     @POST(Api.ENDPOINT_REGISTER_RELAWAN)
@@ -44,5 +42,5 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(Api.ENDPOINT_REGISTER_RELAWAN)
     Call<ResponseRegister> postRegisterRelawan(String nik, String nama_lengkap, String alamat, String no_hp, String email, String pass);
->>>>>>> master
+
 }
