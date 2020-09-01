@@ -91,7 +91,8 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
                     android:hint="@string/no_hp"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:maxLength="14"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

@@ -121,11 +121,12 @@ public class SignUpActivity extends AppCompatActivity {
         btnRegUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImagePicker.Companion.with(SignUpActivity.this)
-                        .crop()
-                        .compress(1024)
-                        .maxResultSize(1080, 1080)
-                        .start();
+                ambilGambar();
+//                ImagePicker.Companion.with(SignUpActivity.this)
+//                        .crop()
+//                        .compress(1024)
+//                        .maxResultSize(1080, 1080)
+//                        .start();
             }
         });
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -243,7 +244,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private boolean checkStoragePermissions(){
-        return ContextCompat.checkSelfPermission(Objects.requireNonNull(this), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 == (PackageManager.PERMISSION_GRANTED);
     }
     private void requestStoragePermissions(){
@@ -251,7 +252,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private boolean checkCameraPermissions(){
-        boolean result = ContextCompat.checkSelfPermission(Objects.requireNonNull(this), Manifest.permission.CAMERA)
+        boolean result = ContextCompat.checkSelfPermission(SignUpActivity.this, Manifest.permission.CAMERA)
                 == (PackageManager.PERMISSION_GRANTED);
         boolean result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 == (PackageManager.PERMISSION_GRANTED);
@@ -263,20 +264,20 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void ambilGambar(){
         ivReg_KTP.setImageResource(0);
-        String options[] = {"kamera", "Galeri", "Cancel"};
+        String options[] = {"Kamera", "Galeri", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pilih foto dari");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (i == 0){
-                    if (checkCameraPermissions()){
+                    if (!checkCameraPermissions()){
                         requestCameraPermissions();
                     } else {
                         ambilDariCamera();
                     }
                 } else if (i == 1){
-                    if (checkStoragePermissions()){
+                    if (!checkStoragePermissions()){
                         requestStoragePermissions();
                     } else {
                         ambilDariGaleri();
@@ -292,8 +293,9 @@ public class SignUpActivity extends AppCompatActivity {
     private void ambilDariGaleri() {
         Intent intentGaleri = new Intent(Intent.ACTION_PICK);
         intentGaleri.setType("image/*");
-        intentGaleri.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intentGaleri, "Pilih Gambar"), IMAGE_PICK_GALLERY_REQUEST_CODE);
+        startActivityForResult(intentGaleri, IMAGE_PICK_GALLERY_REQUEST_CODE);
+//        intentGaleri.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(Intent.createChooser(intentGaleri, "Pilih Gambar"), IMAGE_PICK_GALLERY_REQUEST_CODE);
     }
 
     private void ambilDariCamera() {
@@ -341,25 +343,19 @@ public class SignUpActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
-        if (resultCode == Activity.RESULT_OK){
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CAMERA_REQUEST_CODE){
             Log.e("onActivityResult", "requestCode" + requestCode + ", resultCode" + resultCode );
-            if (requestCode == IMAGE_PICK_CAMERA_REQUEST_CODE){
-                try {
-                    Log.e("CAMERA", image_uri.getPath());
-                    image_uri.getPath();
-                    ivReg_KTP.setImageURI(image_uri);
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-
-            }
-        } else if (requestCode == IMAGE_PICK_GALLERY_REQUEST_CODE && data !=null && data.getData() !=null){
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(SignUpActivity.this.getContentResolver(), data.getData());
-                setToImageView(getResizedBitmap(bitmap, max_resolution_image));
-            } catch (IOException e) {
+                Log.e("CAMERA", image_uri.getPath());
+                image_uri.getPath();
+                assert data != null;
+                ivReg_KTP.setImageURI(image_uri);
+            } catch (Exception e){
                 e.printStackTrace();
             }
+        } if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_GALLERY_REQUEST_CODE){
+            assert data != null;
+            ivReg_KTP.setImageURI(data.getData());
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
