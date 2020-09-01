@@ -363,7 +363,7 @@ public class AddTpsActivity extends AppCompatActivity {
 
     public void Send(View view) {
         try {
-            namatepes = namatps.getText().toString();
+            namatepes = "TPS "+namatps.getText().toString();
             propin = spprov.getSelectedItem().toString();
             kab = spkab.getSelectedItem().toString();
             kec = spkec.getSelectedItem().toString();

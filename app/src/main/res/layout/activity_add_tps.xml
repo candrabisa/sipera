@@ -34,18 +34,30 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/namatps_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:id="@+id/namatps_add"
-                android:hint="Nama TPS" />
+                android:hint="Kode TPS"
+                android:inputType="number|textCapWords"
+                android:phoneNumber="true"
+                app:textInputLayoutFocusedRectEnabled="false" />
+
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Masukan nomer tps contoh = 05"
+            android:textColor="#FF5722" />
 
         <TextView
             android:id="@+id/textVieaw6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
+            android:layout_marginTop="4dp"
             android:text="Provinsi" />
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
@@ -61,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
+            android:layout_marginTop="4dp"
             android:text="Kabupaten" />
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
             android:id="@+id/addspkab_admin"
@@ -70,12 +83,12 @@
             app:hintText="Pilih kabupaten" />
 
 
-
         <TextView
             android:id="@+id/textVaseiew6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
+            android:layout_marginTop="4dp"
             android:text="Kecamatan" />
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
             android:id="@+id/addspkec_admin"
@@ -85,12 +98,12 @@
             app:hintText="Pilih kecamatan" />
 
 
-
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
+            android:layout_marginTop="4dp"
             android:text="Kelurahan" />
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
             android:id="@+id/addspkel_admin"
