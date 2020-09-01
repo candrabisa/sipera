@@ -10,4 +10,5 @@ public class URL {
     public static final String TambahTps =" http://nakulasadewaindonesia.com/tikep/service/tps/add";
     public static final String GetRelawanbyMail ="relawan/jumutemail";
     public static final String buangtps =BASE_URL+"tps/buangtps";
+    public static final String updatetps =BASE_URL+"tps/update";
 }

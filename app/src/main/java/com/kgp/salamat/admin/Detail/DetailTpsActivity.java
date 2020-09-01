@@ -38,6 +38,8 @@ private TextView alamattps;
 ProgressDialog loding;
 String idtps;
     private static final String TAG = "DetailTpsActivity";
+    private String name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,43 @@ String idtps;
 
 
 
+    }
+    private void updatetpsnya() {
+        loding = new ProgressDialog(DetailTpsActivity.this);
+        loding.setCancelable(false);
+        loding.setMessage("Sedang Menyimpan ...");
+        loding.show();
+        StringRequest stringRequest= new StringRequest(Request.Method.PUT, URL.updatetps, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "onResponse add: "+response);
+                loding.dismiss();
+                Toast.makeText(DetailTpsActivity.this, "Berhasil disimpan", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DetailTpsActivity.this, AdminActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                DetailTpsActivity.this.finish();
+                finish();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "eror : "+error);
+                loding.dismiss();
+                // if(isActivityActive) Utils.errorResponse(context, error);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_tps", idtps);
+                params.put("nama_tps", name);
+
+                Log.d(TAG, "getParams: "+params);
+                return params;
+            }
+        };
+        RequestHAndler.getInstance(DetailTpsActivity.this).addToRequestQueue(stringRequest);
     }
 
     private void Buangsajagaperlu() {
@@ -106,7 +145,21 @@ alertPeringat();
     }
 
     public void UpdateTps(View view) {
+        try {
+           name = nama_tps.getText().toString().trim();
+        }catch (Exception e){
+
+        }
+        if(nama_tps == null){
+            nama_tps.setError("Tidak Boleh Kosong");
+        }else{
+            updatetpsnya();
+        }
     }
+
+
+
+
 
     private void alertPeringat(){
         AlertDialog.Builder builder = new AlertDialog.Builder(DetailTpsActivity.this);
