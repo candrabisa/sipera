@@ -20,8 +20,8 @@
         <activity android:name=".admin.Add.UbahProfileActivity" android:theme="@style/ThemaBiru"></activity>
         <activity android:name=".admin.ProfilAdminActivity" android:theme="@style/ThemaBiru"/>
         <activity android:name=".admin.Detail.DetailTpsActivity" android:theme="@style/ThemaBiru"/>
-        <activity android:name=".admin.Add.AddTpsActivity" android:theme="@style/ThemaBiru"/>
-        <activity android:name=".admin.DataTpsActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.Add.AddTpsActivity"  android:parentActivityName=".admin.DataTpsActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.DataTpsActivity" android:parentActivityName=".admin.AdminActivity" android:theme="@style/ThemaBiru"/>
         <activity android:name=".admin.Detail.DetailPaslonActivity" android:theme="@style/ThemaBiru"/>
         <activity android:name=".relawan.ProfilRelawanActivity" />
         <activity android:name=".relawan.InputSuaraActivity" />

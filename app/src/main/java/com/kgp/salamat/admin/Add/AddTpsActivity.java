@@ -23,6 +23,7 @@ import com.kgp.salamat.R;
 import com.kgp.salamat.admin.AdminActivity;
 import com.kgp.salamat.admin.DataTpsActivity;
 import com.kgp.salamat.admin.Helper.RequestHAndler;
+import com.kgp.salamat.admin.ProfilAdminActivity;
 import com.kgp.salamat.admin.Service.URL;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
@@ -333,7 +334,10 @@ public class AddTpsActivity extends AppCompatActivity {
                     Log.d(TAG, "onResponse add: "+response);
                     loding.dismiss();
                     Toast.makeText(AddTpsActivity.this, "Berhasil di tambahkan", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent( AddTpsActivity.this, AdminActivity.class));
+                    Intent intent = new Intent(AddTpsActivity.this,AdminActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    AddTpsActivity.this.finish();
                     finish();
                 }
             }, new Response.ErrorListener() {
@@ -364,7 +368,7 @@ public class AddTpsActivity extends AppCompatActivity {
 
     public void Send(View view) {
         try {
-            namatepes = "TPS "+namatps.getText().toString();
+            namatepes = "TPS "+namatps.getText().toString() +" ";
             propin = spprov.getSelectedItem().toString();
             kab = spkab.getSelectedItem().toString();
             kec = spkec.getSelectedItem().toString();
