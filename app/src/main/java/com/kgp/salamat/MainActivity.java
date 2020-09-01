@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -11,13 +12,20 @@ import com.kgp.salamat.fragment.fragment_beranda;
 import com.kgp.salamat.fragment.fragment_profil;
 import com.kgp.salamat.fragment.fragment_relawan;
 
+import static com.kgp.salamat.LoginActivity.KEYUSER;
+import static com.kgp.salamat.LoginActivity.useremail;
+
 public class MainActivity extends AppCompatActivity {
+    public String usernamerelawan;
 
-
+    private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Bundle extras = getIntent().getExtras();
+         usernamerelawan = extras.getString(KEYUSER);
+        Log.d(TAG, "cek user: "+usernamerelawan);
         if (savedInstanceState == null){
             fragment_beranda fragmentBeranda = new fragment_beranda();
             getSupportFragmentManager()

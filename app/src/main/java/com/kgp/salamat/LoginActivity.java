@@ -30,6 +30,7 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
 
 
+    public static final String KEYUSER = "KEY";
     EditText etUsername, etPassword;
     Button btn_login;
     TextView tv_register;
@@ -117,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                             }else if(level.equals("relawan")){
                                 saveData();
                                 Intent intentLogin = new Intent(LoginActivity.this, MainActivity.class);
+                                intentLogin.putExtra(KEYUSER,username);
                                 startActivity(intentLogin);
                                 finish();
 

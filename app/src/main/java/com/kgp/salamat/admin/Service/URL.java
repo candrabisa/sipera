@@ -8,4 +8,5 @@ public class URL {
     public static final String TokenWilayah ="https://x.rajaapi.com/poe";
     public static final String Wilayah ="https://x.rajaapi.com/MeP7c5ne";
     public static final String TambahTps =" http://nakulasadewaindonesia.com/tikep/service/tps/add";
+    public static final String GetRelawanbyMail ="relawan/jumutemail";
 }
