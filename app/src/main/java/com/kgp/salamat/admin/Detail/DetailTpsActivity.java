@@ -146,11 +146,11 @@ alertPeringat();
 
     public void UpdateTps(View view) {
         try {
-           name = nama_tps.getText().toString().trim();
+           name = nama_tps.getText().toString();
         }catch (Exception e){
-
+            name = "";
         }
-        if(nama_tps == null){
+        if(name.equals("")){
             nama_tps.setError("Tidak Boleh Kosong");
         }else{
             updatetpsnya();
