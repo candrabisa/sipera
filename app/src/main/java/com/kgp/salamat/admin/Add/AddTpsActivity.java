@@ -50,6 +50,8 @@ public class AddTpsActivity extends AppCompatActivity {
     String[] listcoba = {"aku", "sayang"};
     private String token, succes;
     EditText namatps;
+    private String namatepes,propin, kab,kec,kel;
+
 
     private static final String TAG = "AddTpsActivity";
 
@@ -319,45 +321,63 @@ public class AddTpsActivity extends AppCompatActivity {
         loding.setCancelable(false);
         loding.setMessage("Menambah data ...");
         loding.show();
-        String nama = namatps.getText().toString();
-        String propin = spprov.getSelectedItem().toString();
-        String kab = spkab.getSelectedItem().toString();
-        String kec = spkec.getSelectedItem().toString();
-        String kel = spkel.getSelectedItem().toString();
-        StringRequest stringRequest= new StringRequest(Request.Method.POST, URL.TambahTps, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "onResponse add: "+response);
-                loding.dismiss();
-                Toast.makeText(AddTpsActivity.this, "Berhasil di tambahkan", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent( AddTpsActivity.this, DataTpsActivity.class));
-                finish();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "eror : "+error);
-                loding.dismiss();
-                // if(isActivityActive) Utils.errorResponse(context, error);
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("nama_tps", nama);
-                params.put("provinsi",propin );
-                params.put("kabupaten", kab);
-                params.put("kecamatan", kec);
-                params.put("kelurahan", kel);
-                params.put("url_image_tps", "");
-                Log.d(TAG, "getParams: "+params);
-                return params;
-            }
-        };
-        RequestHAndler.getInstance(AddTpsActivity.this).addToRequestQueue(stringRequest);
-    }
+
+
+
+
+
+            StringRequest stringRequest= new StringRequest(Request.Method.POST, URL.TambahTps, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d(TAG, "onResponse add: "+response);
+                    loding.dismiss();
+                    Toast.makeText(AddTpsActivity.this, "Berhasil di tambahkan", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent( AddTpsActivity.this, DataTpsActivity.class));
+                    finish();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d(TAG, "eror : "+error);
+                    loding.dismiss();
+                    // if(isActivityActive) Utils.errorResponse(context, error);
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("nama_tps", namatepes);
+                    params.put("provinsi",propin );
+                    params.put("kabupaten", kab);
+                    params.put("kecamatan", kec);
+                    params.put("kelurahan", kel);
+                    params.put("url_image_tps", "");
+                    Log.d(TAG, "getParams: "+params);
+                    return params;
+                }
+            };
+            RequestHAndler.getInstance(AddTpsActivity.this).addToRequestQueue(stringRequest);
+        }
+
+
 
     public void Send(View view) {
-        AddTps();
+        try {
+            namatepes = namatps.getText().toString();
+            propin = spprov.getSelectedItem().toString();
+            kab = spkab.getSelectedItem().toString();
+            kec = spkec.getSelectedItem().toString();
+            kel = spkel.getSelectedItem().toString();
+        }catch (Exception e){
+
+        }
+
+        if(namatepes==null){
+            namatps.setError("Tidak boleh kosong");
+        }else if(propin==null || kab ==null || kec==null  || kel ==null ){
+            Toast.makeText(this, "Isi semua dengan benar", Toast.LENGTH_SHORT).show();
+        }else {
+            AddTps();
+        }
     }
 }
