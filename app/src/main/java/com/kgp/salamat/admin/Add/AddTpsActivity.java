@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.kgp.salamat.LoginActivity;
 import com.kgp.salamat.R;
+import com.kgp.salamat.admin.AdminActivity;
 import com.kgp.salamat.admin.DataTpsActivity;
 import com.kgp.salamat.admin.Helper.RequestHAndler;
 import com.kgp.salamat.admin.Service.URL;
@@ -332,7 +333,7 @@ public class AddTpsActivity extends AppCompatActivity {
                     Log.d(TAG, "onResponse add: "+response);
                     loding.dismiss();
                     Toast.makeText(AddTpsActivity.this, "Berhasil di tambahkan", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent( AddTpsActivity.this, DataTpsActivity.class));
+                    startActivity(new Intent( AddTpsActivity.this, AdminActivity.class));
                     finish();
                 }
             }, new Response.ErrorListener() {
