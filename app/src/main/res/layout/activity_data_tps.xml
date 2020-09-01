@@ -34,7 +34,6 @@
         android:layout_marginRight="12dp"
         android:layout_marginBottom="90dp"
         android:clickable="true"
-        android:onClick="AddDataTps"
         app:backgroundTint="#8E1A1A"
         app:srcCompat="@android:drawable/ic_lock_idle_lock" />
 

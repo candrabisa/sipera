@@ -66,6 +66,7 @@ public class AddTpsActivity extends AppCompatActivity {
         spkec = findViewById(R.id.addspkec_admin);
         spkel = findViewById(R.id.addspkel_admin);
         namatps = findViewById(R.id.namatps_add);
+        getSupportActionBar().setTitle("Tambah TPS");
         AmbilToken();
 
         spprov.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
