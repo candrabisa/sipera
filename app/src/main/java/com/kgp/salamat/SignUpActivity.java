@@ -19,6 +19,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -40,6 +41,9 @@ import com.kgp.salamat.model.SpinnerItem;
 import com.kgp.salamat.service.RetrofitServiceApi;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -52,6 +56,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -79,6 +85,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     //uri picked image
     private Uri image_uri;
+
+    final String url_Register = "http://nakulasadewaindonesia.com/tikep/service/daftar/add";
 
     //image resolution
     int bitmap_size = 40; // image quality 1-100;
@@ -132,80 +140,91 @@ public class SignUpActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nik = etReg_NIK.getText().toString().trim();
-                String nama_lengkap = etReg_Nama.getText().toString().trim();
-                String alamat = etReg_Alamat.getText().toString().trim();
-                String no_hp = etReg_NoHP.getText().toString().trim();
-                String email = etReg_Email.getText().toString().trim();
-                String pass = etReg_Password.getText().toString().trim();
-                String confirmpass = etReg_UlangiPassword.getText().toString().trim();
+                signup();
+            }
+        });
+    }
+
+    private void signup(){
+        String nik = etReg_NIK.getText().toString();
+        String nama_lengkap = etReg_Nama.getText().toString();
+        String alamat = etReg_Alamat.getText().toString();
+        String no_hp = etReg_NoHP.getText().toString();
+        String email = etReg_Email.getText().toString();
+        String pass = etReg_Password.getText().toString();
+        String confirmpass = etReg_UlangiPassword.getText().toString();
 
 //                ImageView ktp = ivReg_KTP.
 
-                if (nik.isEmpty()){
-                    etReg_NIK.setError("NIK belum diisi");
-                    etReg_NIK.requestFocus();
-                    return;
-                } else if(nik.length()<16){
-                    etReg_NIK.setError("NIK KTP Harus memiliki 16 angka");
-                    etReg_NIK.requestFocus();
-                } else if (nama_lengkap.isEmpty()) {
-                    etReg_Nama.setError("Nama belum diisi");
-                    etReg_Nama.requestFocus();
-                    return;
-                } else if (alamat.isEmpty()){
-                    etReg_Alamat.setError("Alamat belum diisi");
-                    etReg_Alamat.requestFocus();
-                    return;
-                } else if (no_hp.isEmpty()){
-                    etReg_NoHP.setError("No HP belum diisi");
-                    etReg_NoHP.requestFocus();
-                    return;
-                } else if (no_hp.length()<10){
-                    etReg_NoHP.setError("No HP setidaknya memiliki 11 angka");
-                    etReg_NoHP.requestFocus();
-                    return;
-                } else if (email.isEmpty()){
-                    etReg_Email.setError("Email belum diisi");
-                    etReg_Email.requestFocus();
-                    return;
-                } else if(pass.isEmpty()){
-                    etReg_Password.setError("Password belum diisi");
-                    etReg_Password.requestFocus();
-                    return;
-                } else if (pass.length()<6){
-                    etReg_Password.setError("Password harus 6-16 karakter");
-                    etReg_Password.requestFocus();
-                    return;
-                } else if (confirmpass.isEmpty()){
-                    etReg_UlangiPassword.setError("Ulangi password belum diisi");
-                    etReg_UlangiPassword.requestFocus();
-                    return;
-                } else if (!confirmpass.equals(pass)){
-                    etReg_UlangiPassword.setError("Password tidak sesuai");
-                    etReg_UlangiPassword.requestFocus();
-                    return;
-                } else {
-                    Call<ResponseRegister> call = RetrofitServiceApi.getApi().postRegisterRelawan(nik, nama_lengkap, alamat, no_hp, email, pass);
-                    call.enqueue(new Callback<ResponseRegister>() {
-                        @Override
-                        public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
-                            if (response.body().isEror() == false){
-                                startActivity( new Intent(SignUpActivity.this, LoginActivity.class));
-                                Toast.makeText(SignUpActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(SignUpActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        }
+        if (nik.isEmpty()){
+            etReg_NIK.setError("NIK belum diisi");
+            etReg_NIK.requestFocus();
+            return;
+        } else if(nik.length()<16){
+            etReg_NIK.setError("NIK KTP Harus memiliki 16 angka");
+            etReg_NIK.requestFocus();
+        } else if (nama_lengkap.isEmpty()) {
+            etReg_Nama.setError("Nama belum diisi");
+            etReg_Nama.requestFocus();
+            return;
+        } else if (alamat.isEmpty()){
+            etReg_Alamat.setError("Alamat belum diisi");
+            etReg_Alamat.requestFocus();
+            return;
+        } else if (no_hp.isEmpty()){
+            etReg_NoHP.setError("No HP belum diisi");
+            etReg_NoHP.requestFocus();
+            return;
+        } else if (no_hp.length()<10){
+            etReg_NoHP.setError("No HP setidaknya memiliki 11 angka");
+            etReg_NoHP.requestFocus();
+            return;
+        } else if (email.isEmpty()){
+            etReg_Email.setError("Email belum diisi");
+            etReg_Email.requestFocus();
+            return;
+        } else if(pass.isEmpty()){
+            etReg_Password.setError("Password belum diisi");
+            etReg_Password.requestFocus();
+            return;
+        } else if (pass.length()<6){
+            etReg_Password.setError("Password harus 6-16 karakter");
+            etReg_Password.requestFocus();
+            return;
+        } else if (confirmpass.isEmpty()){
+            etReg_UlangiPassword.setError("Ulangi password belum diisi");
+            etReg_UlangiPassword.requestFocus();
+            return;
+        } else if (!confirmpass.equals(pass)){
+            etReg_UlangiPassword.setError("Password tidak sesuai");
+            etReg_UlangiPassword.requestFocus();
+            return;
+        } else {
+//                    new RegisterUser().execute(nik, nama_lengkap, alamat, no_hp, email, pass);
+            JSONObject paramObject = new JSONObject();
+            Call<ResponseRegister> call = RetrofitServiceApi
+                    .getInstance()
+                    .getApi()
+                    .add(nik, nama_lengkap, alamat, no_hp, email, pass);
+            call.enqueue(new Callback<ResponseRegister>() {
+                @Override
+                public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
+                    if (response.code() == 201) {
+                        ResponseRegister responseRegister = response.body();
+                        Toast.makeText(SignUpActivity.this, responseRegister.getMessage(), Toast.LENGTH_LONG).show();
+                    } else if (response.code() == 422) {
+                        Toast.makeText(SignUpActivity.this, "User Already Exists", Toast.LENGTH_LONG).show();
+                    }
 
-                        @Override
-                        public void onFailure(Call<ResponseRegister> call, Throwable t) {
-                            Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
                 }
-            }
-        });
+
+                @Override
+                public void onFailure(Call<ResponseRegister> call, Throwable t) {
+                    Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
     }
     @Override
     public void onBackPressed() {
@@ -398,4 +417,57 @@ public class SignUpActivity extends AppCompatActivity {
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_DeKa_" + timeStamp + ".jpg");
         return mediaFile;
     }
+
+//    private class RegisterUser extends AsyncTask<String, Void, String> {
+//        @Override
+//        protected String doInBackground(String... strings) {
+//            String nik = strings[0];
+//            String nama_lengkap = strings[1];
+//            String alamat = strings[2];
+//            String no_hp = strings[3];
+//            String email = strings[4];
+//            String pass = strings[5];
+//
+//            String finalURL = url_Register + "?nik=" + nik
+//                    + "&nama_lengkap=" + nama_lengkap
+//                    + "&alamat=" + alamat
+//                    + "no_hp=" + no_hp
+//                    + "email=" + email
+//                    + "pass=" + pass;
+//
+//            try {
+//                OkHttpClient okHttpClient = new OkHttpClient();
+//                Request request = new Request.Builder()
+//                        .url(finalURL)
+//                        .get()
+//                        .build();
+//                okhttp3.Response response = null;
+//
+//                try {
+//                    response = okHttpClient.newCall(request).execute();
+//                    if (response.isSuccessful()){
+//                        String result = response.body().string();
+//                            showToast("Register successful");
+//                            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            } catch (Exception e){
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//    }
+//
+//    private void showToast(final String Text) {
+//        this.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Toast.makeText(SignUpActivity.this, Text, Toast.LENGTH_LONG).show();
+//            }
+//        });
+//    }
 }

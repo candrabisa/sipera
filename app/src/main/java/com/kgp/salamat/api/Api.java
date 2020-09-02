@@ -8,5 +8,5 @@ public class Api {
     public static final String ENDPOINT_LOGIN = BASE_URL+ "mlebu/cek";
 
     //register
-    public static final String ENDPOINT_REGISTER_RELAWAN = "daftar/add";
+    public static final String ENDPOINT_REGISTER_RELAWAN = BASE_URL+ "daftar/add";
 }
