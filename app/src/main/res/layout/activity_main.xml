@@ -7,12 +7,13 @@
     android:background="#FFFFFF"
     android:gravity="center"
     android:layout_gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior">
+        android:layout_height="match_parent">
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="wrap_content"
@@ -20,7 +21,12 @@
             tools:ignore="MissingConstraints"
             tools:context=".activity.MainActivity"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior">
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation"
             android:layout_width="match_parent"
