@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.kgp.salamat.api.ApiService;
+import com.kgp.salamat.model.ResponseDaftar;
 import com.kgp.salamat.model.ResponseRegister;
 import com.kgp.salamat.model.ResponseSpinnerTps;
 import com.kgp.salamat.model.SpinnerItem;
@@ -61,6 +62,8 @@ import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
 public class SignUpActivity extends AppCompatActivity {
     SearchableSpinner spinner;
@@ -91,6 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
     //image resolution
     int bitmap_size = 40; // image quality 1-100;
     int max_resolution_image = 800;
+    private String tps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,29 +204,38 @@ public class SignUpActivity extends AppCompatActivity {
             etReg_UlangiPassword.requestFocus();
             return;
         } else {
-//                    new RegisterUser().execute(nik, nama_lengkap, alamat, no_hp, email, pass);
-            JSONObject paramObject = new JSONObject();
-            Call<ResponseRegister> call = RetrofitServiceApi
-                    .getInstance()
-                    .getApi()
-                    .add(nik, nama_lengkap, alamat, no_hp, email, pass);
-            call.enqueue(new Callback<ResponseRegister>() {
-                @Override
-                public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
-                    if (response.code() == 201) {
-                        ResponseRegister responseRegister = response.body();
-                        Toast.makeText(SignUpActivity.this, responseRegister.getMessage(), Toast.LENGTH_LONG).show();
-                    } else if (response.code() == 422) {
-                        Toast.makeText(SignUpActivity.this, "User Already Exists", Toast.LENGTH_LONG).show();
+            try {
+                tps = spinner.getSelectedItem().toString();
+                Call<ResponseDaftar> call = RetrofitServiceApi
+                        .getInstance()
+                        .getApi()
+                        .add(nik, nama_lengkap, alamat, no_hp, email, pass, tps);
+                call.enqueue(new Callback<ResponseDaftar>() {
+                    @Override
+                    public void onResponse(Call<ResponseDaftar> call, Response<ResponseDaftar> response) {
+                        ResponseDaftar responseDaftars = new ResponseDaftar();
+                        responseDaftars = response.body();
+                        String status = responseDaftars.getStatus();
+                        if (status.equals("200")){
+                            Toast.makeText(SignUpActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(SignUpActivity.this, "Registrasi gagal", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
 
-                }
+                    @Override
+                    public void onFailure(Call<ResponseDaftar> call, Throwable t) {
+                        Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            } catch (Exception e){
+                Toast.makeText(this, "Pilih TPS Tempat Bertugas", Toast.LENGTH_SHORT).show();
+            }
 
-                @Override
-                public void onFailure(Call<ResponseRegister> call, Throwable t) {
-                    Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
         }
 
     }

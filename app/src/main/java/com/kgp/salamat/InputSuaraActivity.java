@@ -1,4 +1,4 @@
-package com.kgp.salamat.relawan;
+package com.kgp.salamat;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,8 +1,8 @@
 package com.kgp.salamat.api;
 
+import com.kgp.salamat.model.ResponseDaftar;
 import com.kgp.salamat.model.ResponseListPaslon;
 import com.kgp.salamat.model.ResponseListRelawan;
-import com.kgp.salamat.model.ResponseRegister;
 import com.kgp.salamat.model.ResponseSpinnerTps;
 
 import retrofit2.Call;
@@ -24,17 +24,16 @@ public interface ApiService {
     @GET(Api.ENDPOINT_SPINNER_TPS)
     Call<ResponseSpinnerTps> getspinnertps();
 
-
-    //POST Register
     @FormUrlEncoded
-    @POST("daftar.php")
-    Call<ResponseRegister> add(
+    @POST(Api.ENDPOINT_REGISTER_RELAWAN)
+    Call<ResponseDaftar> add(
             @Field("nik") String nik,
             @Field("nama_lengkap") String nama_lengkap,
             @Field("alamat") String alamat,
             @Field("no_hp") String no_hp,
             @Field("email") String email,
-            @Field("pass") String pass
+            @Field("pass") String pass,
+            @Field("tps") String tps
     );
 
 //    @FormUrlEncoded
