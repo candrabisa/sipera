@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -36,6 +37,7 @@ public class DataTpsActivity extends AppCompatActivity {
     private RecyclerView rvTps;
     private List<TpsItem> listtps=new ArrayList<>();
     private static final String TAG = "DataTpsActivity";
+    private SwipeRefreshLayout swipe;
 
 
     @Override
@@ -43,11 +45,24 @@ public class DataTpsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_tps);
         rvTps=findViewById(R.id.rctpsadmin);
+        swipe=findViewById(R.id.id_swipe);
+        ketikaDiSwipe();
 
 
     }
     public void AddDataTps(View view) {
         startActivity(new Intent(DataTpsActivity.this, AddTpsActivity.class));
+    }
+    private void ketikaDiSwipe() {
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipe.setRefreshing(true);
+                // ambilData();
+                jumuttps();
+                swipe.setRefreshing(false);
+            }
+        });
     }
 
     @Override
@@ -110,6 +125,7 @@ public class DataTpsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseTpsAdmin> call, Response<ResponseTpsAdmin> response) {
                 Log.d(TAG, "onResponse: "+response);
+                listtps.clear();
                 listtps = response.body().getTps();
                 rvTps.setAdapter(new TpsAdapter(DataTpsActivity.this,listtps));
                 rvTps.setLayoutManager(new LinearLayoutManager(DataTpsActivity.this));

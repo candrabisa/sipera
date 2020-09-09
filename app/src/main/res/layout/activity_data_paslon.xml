@@ -42,14 +42,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/id_swipepaslon"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/id_rcpaslon"
-            tools:itemCount="2"
-            tools:listitem="@layout/item_list_paslon">
+            android:layout_height="match_parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/id_rcpaslon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FDFDFD"
+                tools:listitem="@layout/item_list_paslon" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     </LinearLayout>
 

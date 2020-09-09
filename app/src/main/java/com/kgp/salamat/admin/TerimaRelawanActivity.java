@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -39,18 +40,32 @@ public class TerimaRelawanActivity extends AppCompatActivity {
     private RecyclerView rvCalrel;
     private List<CalRelModel> listcalrel=new ArrayList<>();
     private String id,nama,nik,alamat,tps,pass,urlimage,cdd,hash,email,nohp;
+    private SwipeRefreshLayout swipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terima_relawan);
         loading = findViewById(R.id.lodingterima);
+        swipe = findViewById(R.id.id_swipetrima);
         rvCalrel = findViewById(R.id.itemterimarel);
         getSupportActionBar().setTitle("Terima Relawan");
+        ketikaDiSwipe();
 
 
 
+    }
 
+    private void ketikaDiSwipe() {
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipe.setRefreshing(true);
+                // ambilData();
+               getcalrel();
+                swipe.setRefreshing(false);
+            }
+        });
     }
     public void getcalrel(){
 //        dialog = new ProgressDialog(TerimaRelawanActivity.this);

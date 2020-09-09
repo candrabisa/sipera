@@ -34,7 +34,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textVdifew7"
+                    android:id="@+id/namareladmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -46,7 +46,7 @@
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/textVdifew6"
+                    android:id="@+id/nikreladmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -58,7 +58,7 @@
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/textVdifew5"
+                    android:id="@+id/alamatreladmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -70,7 +70,7 @@
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/nama_tps_admin"
+                    android:id="@+id/tpsreladmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -85,28 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="6dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/btncancel"
-                        android:text="Hapus"
-                        android:textColor="#FFFFFF" />
-
-                    <Button
-                        android:id="@+id/button2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="6dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/btnok"
-                        android:text="Lihat"
-                        android:textColor="#FFFFFF" />
-                </LinearLayout>
+                    android:orientation="horizontal"/>
 
             </LinearLayout>
 

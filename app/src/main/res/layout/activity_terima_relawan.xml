@@ -14,10 +14,18 @@
         android:layout_width="130dp"
         style="@style/SpinKitView.Circle"
         android:layout_height="130dp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/id_swipetrima"
         android:layout_width="match_parent"
-        android:id="@+id/itemterimarel"
-        tools:listitem="@layout/item_terima_relawan"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/itemterimarel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FDFDFD"
+            tools:listitem="@layout/item_terima_relawan" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </RelativeLayout>

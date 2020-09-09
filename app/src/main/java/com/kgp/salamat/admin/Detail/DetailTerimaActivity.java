@@ -1,5 +1,6 @@
 package com.kgp.salamat.admin.Detail;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -36,7 +37,8 @@ public class DetailTerimaActivity extends AppCompatActivity {
    private EditText nik,nama,alamat,hp,email;
    String idcalrel;
    TextView tps;
-   SpinKitView loading;
+   //SpinKitView loading;
+   ProgressDialog loading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,7 @@ public class DetailTerimaActivity extends AppCompatActivity {
         hp = findViewById(R.id.idteldetter);
         tps = findViewById(R.id.idtpsdetter);
         email = findViewById(R.id.idemaildetter);
-        loading = findViewById(R.id.spin_kit);
+      //  loading = findViewById(R.id.spin_kit);
         Bundle bundle=getIntent().getBundleExtra(CalRelAdapter.DATAjEXTRA);
         listcalon = Parcels.unwrap(bundle.getParcelable(DATACALON));
         idcalrel = listcalon.getId_daftar();
@@ -62,12 +64,17 @@ public class DetailTerimaActivity extends AppCompatActivity {
     }
 
     private void TolakCalrel(){
-       loading.setVisibility(View.VISIBLE);
+       //loading.setVisibility(View.VISIBLE);
+        loading = new ProgressDialog(DetailTerimaActivity.this);
+        loading.setCancelable(false);
+        loading.setMessage("Menghubungi Server ...");
+        loading.show();
        String namaa = listcalon.getNama_lengkap();
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL.tolakcalrel, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                loading.setVisibility(View.GONE);
+               // loading.setVisibility(View.GONE);
+                loading.dismiss();
                 Toast.makeText(DetailTerimaActivity.this, namaa+" Ditolak", Toast.LENGTH_SHORT).show();
                 finish();
 
@@ -75,7 +82,8 @@ public class DetailTerimaActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                loading.setVisibility(View.GONE);
+              //  loading.setVisibility(View.GONE);
+                loading.dismiss();
                 Toast.makeText(DetailTerimaActivity.this, "Tidak terhubung ke server", Toast.LENGTH_SHORT).show();
             }
         }) {

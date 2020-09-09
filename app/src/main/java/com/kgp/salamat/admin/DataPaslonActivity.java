@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -36,6 +37,7 @@ public class DataPaslonActivity extends AppCompatActivity {
     List<ModelPaslon>listpaslon = new ArrayList<>();
     RecyclerView rvpaslon;
     ProgressDialog dialog;
+    private SwipeRefreshLayout swipe;
     String id_paslon,nama_paslon,no_paslon,url_image,cdd,udd,hash;
     private static final String TAG = "DataPaslonActivity";
     @Override
@@ -43,7 +45,9 @@ public class DataPaslonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_paslon);
         rvpaslon = findViewById(R.id.id_rcpaslon);
+        swipe = findViewById(R.id.id_swipepaslon);
         getSupportActionBar().setTitle("Data Paslon");
+        ketikaDiSwipe();
     }
 
     public void AddDataPaslon(View view) {
@@ -54,6 +58,17 @@ public class DataPaslonActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getpaslon();
+    }
+    private void ketikaDiSwipe() {
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipe.setRefreshing(true);
+                // ambilData();
+               getpaslon();
+                swipe.setRefreshing(false);
+            }
+        });
     }
 
     public void getpaslon(){

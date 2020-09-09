@@ -42,16 +42,19 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rctpsadmin"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/id_swipe"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FDFDFD"
-            tools:listitem="@layout/item_tps">
+            android:layout_height="match_parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rctpsadmin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FDFDFD"
+                tools:listitem="@layout/item_tps" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 
