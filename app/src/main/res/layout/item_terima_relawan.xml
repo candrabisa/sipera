@@ -106,7 +106,8 @@
                         android:layout_weight="1"
                         android:background="@drawable/btncancel"
                         android:text="Tolak"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:visibility="gone" />
 
                     <Button
                         android:id="@+id/button2"
@@ -116,7 +117,8 @@
                         android:layout_weight="1"
                         android:background="@drawable/btnok"
                         android:text="Terima"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:visibility="gone" />
                 </LinearLayout>
 
             </LinearLayout>

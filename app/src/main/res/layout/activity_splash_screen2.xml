@@ -23,6 +23,16 @@
             android:textColor="@color/colorPrimary"
             android:textSize="46sp"
             android:justificationMode="inter_word"/>
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            style="@style/SpinKitView.Large.ChasingDots"
+            app:SpinKit_Color="#10ED19"
+            android:layout_gravity="center"
+            android:id="@+id/spin_kit"
+            android:layout_height="match_parent">
+
+        </com.github.ybq.android.spinkit.SpinKitView>
     </LinearLayout>
 
 </RelativeLayout>
