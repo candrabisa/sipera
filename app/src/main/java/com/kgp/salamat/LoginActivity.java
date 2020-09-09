@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(LoginActivity.this, "Terjadi masalah di server", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Gagal menghubungi server coba beberapa saat lagi", Toast.LENGTH_SHORT).show();
                     progressDialog2.dismiss();
                 }
             }){

@@ -324,27 +324,19 @@ public class AddTpsActivity extends AppCompatActivity {
         loding.setCancelable(false);
         loding.setMessage("Menambah data ...");
         loding.show();
-
-
-
-
-
             StringRequest stringRequest= new StringRequest(Request.Method.POST, URL.TambahTps, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     Log.d(TAG, "onResponse add: "+response);
                     loding.dismiss();
                     Toast.makeText(AddTpsActivity.this, "Berhasil di tambahkan", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(AddTpsActivity.this,AdminActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    AddTpsActivity.this.finish();
                     finish();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.d(TAG, "eror : "+error);
+                    Toast.makeText(AddTpsActivity.this, "Gagal menghubungi server", Toast.LENGTH_SHORT).show();
                     loding.dismiss();
                     // if(isActivityActive) Utils.errorResponse(context, error);
                 }
@@ -363,6 +355,7 @@ public class AddTpsActivity extends AppCompatActivity {
                 }
             };
             RequestHAndler.getInstance(AddTpsActivity.this).addToRequestQueue(stringRequest);
+
         }
 
 

@@ -7,24 +7,9 @@
     android:orientation="vertical"
     tools:context=".admin.TerimaRelawanActivity">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Terima Relawan"
-        android:textSize="23dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="20 Agsutus 2019" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+        android:id="@+id/itemterimarel"
         tools:listitem="@layout/item_terima_relawan"
         android:layout_height="match_parent" />
 </LinearLayout>

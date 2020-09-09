@@ -35,9 +35,8 @@ import retrofit2.Response;
 public class DataTpsActivity extends AppCompatActivity {
     private RecyclerView rvTps;
     private List<TpsItem> listtps=new ArrayList<>();
-    private RecyclerView.Adapter adapter;
     private static final String TAG = "DataTpsActivity";
-    private TpsAdapter adaptertps;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +44,16 @@ public class DataTpsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_data_tps);
         rvTps=findViewById(R.id.rctpsadmin);
 
-//        TpsItem baru =new TpsItem();
-//        baru.setIdTps("1");
-//        baru.setNamaTps("Aku");
-//        baru.setAlamatTps("Cinta kamu");
-//        listtps.add(baru);
-        jumuttps();
 
-        rvTps.setAdapter(new TpsAdapter(DataTpsActivity.this,listtps));
-        rvTps.setLayoutManager(new LinearLayoutManager(DataTpsActivity.this));
     }
-
     public void AddDataTps(View view) {
         startActivity(new Intent(DataTpsActivity.this, AddTpsActivity.class));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        jumuttps();
     }
 
     @Override
@@ -74,7 +70,6 @@ public class DataTpsActivity extends AppCompatActivity {
                 rvTps.setAdapter(new TpsAdapter(DataTpsActivity.this,filtercatatan));
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String s) {
                 List<TpsItem>filtercatatan=fiterData(listtps, s);
@@ -82,7 +77,6 @@ public class DataTpsActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         return super.onCreateOptionsMenu(menu);
 
 

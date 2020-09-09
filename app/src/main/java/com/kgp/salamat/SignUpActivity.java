@@ -33,10 +33,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.kgp.salamat.api.ApiService;
 import com.kgp.salamat.model.ResponseDaftar;
-import com.kgp.salamat.model.ResponseRegister;
 import com.kgp.salamat.model.ResponseSpinnerTps;
 import com.kgp.salamat.model.SpinnerItem;
 import com.kgp.salamat.service.RetrofitServiceApi;
@@ -254,11 +252,11 @@ public class SignUpActivity extends AppCompatActivity {
         tampilData.enqueue(new Callback<ResponseSpinnerTps>() {
             @Override
             public void onResponse(Call<ResponseSpinnerTps> call, Response<ResponseSpinnerTps> response) {
-            spinnerItems=response.body().getSpinner();
+                spinnerItems=response.body().getSpinner();
                 for (int i = 0; i <spinnerItems.size() ; i++) {
                     listspineralamat.add(spinnerItems.get(i).getAlamatTps().trim());
                 }
-             tampilspinner(spinner,listspineralamat);
+                tampilspinner(spinner,listspineralamat);
             }
 
             @Override

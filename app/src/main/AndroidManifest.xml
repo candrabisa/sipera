@@ -26,11 +26,11 @@
         <activity android:name=".relawan.ProfilRelawanActivity" />
         <activity android:name=".InputSuaraActivity" />
         <activity android:name=".admin.Add.AddPaslonActivity" android:theme="@style/ThemaBiru" />
-        <activity android:name=".admin.DataPaslonActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.DataPaslonActivity" android:parentActivityName=".admin.AdminActivity" android:theme="@style/ThemaBiru"/>
         <activity android:name=".admin.Detail.DetailListRelawanActivity" android:theme="@style/ThemaBiru"/>
         <activity android:name=".admin.ListRelawanActivity" android:theme="@style/ThemaBiru"/>
         <activity android:name=".admin.Detail.DetailTerimaActivity" android:theme="@style/ThemaBiru"/>
-        <activity android:name=".admin.TerimaRelawanActivity" android:theme="@style/ThemaBiru"/>
+        <activity android:name=".admin.TerimaRelawanActivity" android:parentActivityName=".admin.AdminActivity" android:theme="@style/ThemaBiru"/>
         <activity android:name=".admin.HasilSuaraActivity" android:theme="@style/ThemaBiru"/>
         <activity android:name=".admin.AdminActivity" android:theme="@style/ThemaBiru">
 

@@ -28,14 +28,18 @@ import org.json.JSONObject;
 
 public class AdminActivity extends AppCompatActivity {
 ProgressDialog progressDialog;
-TextView jumlahtps;
-    private String totaltps;
+TextView jumlahtps,totalcalonrel,jumlpaslon;
+    private String totaltps,totcalrel,totalpaslon;
     private static final String TAG = "AdminActivity";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
         jumlahtps=findViewById(R.id.jumlahtps_admin);
+        totalcalonrel=findViewById(R.id.tvcalonrel);
+        jumlpaslon=findViewById(R.id.tv_paslonha);
 
 
     }
@@ -44,6 +48,8 @@ TextView jumlahtps;
     protected void onResume() {
         super.onResume();
         JumlahTps();
+        Jumlahcalonrel();
+        jumpas();
     }
 
     public void HasilSuara(View view) {
@@ -86,7 +92,56 @@ TextView jumlahtps;
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(AdminActivity.this, "Terjadi maslaah di server", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(AdminActivity.this, "Terjadi maslaah di server", Toast.LENGTH_SHORT).show();
+            }
+        }){
+
+        };
+
+        RequestHAndler.getInstance(AdminActivity.this).addToRequestQueue(stringRequest);
+    }
+
+    private void Jumlahcalonrel(){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL.jumlahcalonrel, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jumut = new JSONObject(response);
+                    totcalrel = jumut.getString("Total");
+                    totalcalonrel.setText(totcalrel);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+           //     Toast.makeText(AdminActivity.this, "Terjadi maslaah di server", Toast.LENGTH_SHORT).show();
+            }
+        }){
+
+        };
+
+        RequestHAndler.getInstance(AdminActivity.this).addToRequestQueue(stringRequest);
+    }
+    private void jumpas(){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL.jumpas, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jumut = new JSONObject(response);
+                    totalpaslon = jumut.getString("Total");
+                    jumlpaslon.setText(totalpaslon);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //     Toast.makeText(AdminActivity.this, "Terjadi maslaah di server", Toast.LENGTH_SHORT).show();
             }
         }){
 

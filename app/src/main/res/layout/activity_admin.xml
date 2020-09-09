@@ -86,7 +86,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/texdftView5"
+                        android:id="@+id/tvcalonrel"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:layout_margin="8dp"
@@ -167,7 +167,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/texastView5"
+                        android:id="@+id/tv_paslonha"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:layout_margin="8dp"

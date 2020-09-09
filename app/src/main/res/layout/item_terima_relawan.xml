@@ -7,10 +7,13 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
+        android:id="@+id/cardnyacoy"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_weight="1"
-        app:cardBackgroundColor="#03A9F4"
+        app:cardBackgroundColor="#2196F3"
         app:cardCornerRadius="10dp">
 
         <LinearLayout
@@ -34,7 +37,15 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textVdifew7"
+                    android:id="@+id/idcalrel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvnamacalrel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -46,7 +57,7 @@
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/textVdifew6"
+                    android:id="@+id/tvnikcalrel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -58,7 +69,7 @@
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/textVdifew5"
+                    android:id="@+id/tvalamatcalrel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -70,7 +81,7 @@
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/nama_tps_admin"
+                    android:id="@+id/tvtpscalrel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
@@ -88,7 +99,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/btntolak"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="6dp"

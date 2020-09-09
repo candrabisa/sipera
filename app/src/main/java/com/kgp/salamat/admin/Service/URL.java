@@ -11,4 +11,11 @@ public class URL {
     public static final String GetRelawanbyMail ="relawan/jumutemail";
     public static final String buangtps =BASE_URL+"tps/buangtps";
     public static final String updatetps =BASE_URL+"tps/update";
+    public static final String jumlahcalonrel =BASE_URL+"daftar/jumlahcalonrelawan";
+    public static final String getcalrel =BASE_URL+"daftar/calonrel";
+    public static final String tolakcalrel =BASE_URL+"daftar/delete";
+    public static final String ambilpaslon =BASE_URL+"paslon/ambilpaslon";
+    public static final String addpaslon =BASE_URL+"paslon/add";
+    public static final String jumpas =BASE_URL+"paslon/jumlah";
+    public static final String deletepaslon =BASE_URL+"paslon/hapus";
 }

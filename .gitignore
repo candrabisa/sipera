@@ -12,3 +12,5 @@
 /captures
 .externalNativeBuild
 .cxx
+
+app/src/main/java/com/kgp/salamat/admin/Adapter/CalRelAdapter.java
