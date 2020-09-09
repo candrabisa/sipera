@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.kgp.salamat.R;
 import com.kgp.salamat.admin.Adapter.CalRelAdapter;
 import com.kgp.salamat.admin.Adapter.TpsAdapter;
@@ -33,7 +35,7 @@ import java.util.List;
 
 public class TerimaRelawanActivity extends AppCompatActivity {
     ProgressDialog dialog;
-
+    private SpinKitView loading;
     private RecyclerView rvCalrel;
     private List<CalRelModel> listcalrel=new ArrayList<>();
     private String id,nama,nik,alamat,tps,pass,urlimage,cdd,hash,email,nohp;
@@ -42,19 +44,19 @@ public class TerimaRelawanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terima_relawan);
+        loading = findViewById(R.id.lodingterima);
         rvCalrel = findViewById(R.id.itemterimarel);
         getSupportActionBar().setTitle("Terima Relawan");
-        getcalrel();
-        rvCalrel.setAdapter(new CalRelAdapter(TerimaRelawanActivity.this,listcalrel));
-        rvCalrel.setLayoutManager(new LinearLayoutManager(TerimaRelawanActivity.this));
+
+
 
 
     }
     public void getcalrel(){
-        dialog = new ProgressDialog(TerimaRelawanActivity.this);
-        dialog.setMessage("Tunggu Sebentar ...");
-        dialog.setCancelable(false);
-        dialog.show();
+//        dialog = new ProgressDialog(TerimaRelawanActivity.this);
+//        dialog.setMessage("Tunggu Sebentar ...");
+//        dialog.setCancelable(false);
+//        dialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL.getcalrel, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -89,7 +91,8 @@ public class TerimaRelawanActivity extends AppCompatActivity {
                         }
                         rvCalrel.setAdapter(new CalRelAdapter(TerimaRelawanActivity.this,listcalrel));
                         rvCalrel.setLayoutManager(new LinearLayoutManager(TerimaRelawanActivity.this));
-                        dialog.dismiss();
+//                        dialog.dismiss();
+                        loading.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -98,11 +101,18 @@ public class TerimaRelawanActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                dialog.dismiss();
+               // dialog.dismiss();
+                loading.setVisibility(View.GONE);
                 Toast.makeText(TerimaRelawanActivity.this, "Tidak terhubung ke server", Toast.LENGTH_SHORT).show();
             }
         });
         RequestHAndler.getInstance(TerimaRelawanActivity.this).addToRequestQueue(stringRequest);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        getcalrel();
     }
 
     @Override

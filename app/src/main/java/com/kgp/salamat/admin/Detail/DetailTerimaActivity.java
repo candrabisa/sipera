@@ -68,7 +68,7 @@ public class DetailTerimaActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 loading.setVisibility(View.GONE);
-                Toast.makeText(DetailTerimaActivity.this, namaa+" ditolak...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailTerimaActivity.this, namaa+" Ditolak", Toast.LENGTH_SHORT).show();
                 finish();
 
             }
