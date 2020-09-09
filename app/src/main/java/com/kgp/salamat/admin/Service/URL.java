@@ -18,4 +18,5 @@ public class URL {
     public static final String addpaslon =BASE_URL+"paslon/add";
     public static final String jumpas =BASE_URL+"paslon/jumlah";
     public static final String deletepaslon =BASE_URL+"paslon/hapus";
+    public static final String getrelawan =BASE_URL+"relawan/ambilrelawan";
 }

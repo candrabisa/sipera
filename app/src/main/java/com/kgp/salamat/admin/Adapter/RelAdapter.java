@@ -27,17 +27,17 @@ public class RelAdapter extends RecyclerView.Adapter<RelAdapter.holder> {
     @NonNull
     @Override
     public holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_tps, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_list_relawan, parent, false);
         return new holder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull holder holder, int position) {
-        RelawanItem dm = listrelawan.get(position);
-        holder.nik.setText(dm.getNik());
-        holder.nama.setText(dm.getNamaLengkap());
-        holder.alamt.setText(dm.getAlamat());
-        holder.tps.setText(dm.getTps());
+        RelawanItem dm =listrelawan.get(position);
+        holder.nik.setText(dm.getNik().toString());
+        holder.nama.setText(dm.getNamaLengkap().toString());
+        holder.alamt.setText(dm.getAlamat().toString());
+        holder.tps.setText(dm.getTps().toString());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
