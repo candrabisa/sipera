@@ -220,7 +220,7 @@ public class SignUpActivity extends AppCompatActivity {
                         responseDaftars = response.body();
                         String status = responseDaftars.getStatus();
                         if (status.equals("200")){
-                            Toast.makeText(SignUpActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, "Regristrasi berhasil", Toast.LENGTH_SHORT).show();
                             loading.dismiss();
                             Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                             startActivity(intent);
