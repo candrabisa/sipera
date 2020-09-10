@@ -37,6 +37,7 @@ public class DetailTerimaActivity extends AppCompatActivity {
     CalRelModel listcalon;
    private EditText nik,nama,alamat,hp,email;
    String idcalrel;
+   String lv = "relawan";
    TextView tps;
    //SpinKitView loading;
    ProgressDialog loading;
@@ -81,7 +82,8 @@ public class DetailTerimaActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.d(TAG, "onResponse add: "+response);
                 loading.dismiss();
-                Toast.makeText(DetailTerimaActivity.this, namaa +" Diterima sebagai relawan", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(DetailTerimaActivity.this, namaa +" Diterima sebagai relawan", Toast.LENGTH_SHORT).show();
+                Terima1();
                 TolakCalrel();
                 finish();
             }
@@ -104,6 +106,49 @@ public class DetailTerimaActivity extends AppCompatActivity {
                 params.put("email", emaill);
                 params.put("url_image", "");
                 params.put("tps", tpss);
+                Log.d(TAG, "param: "+params);
+                return params;
+            }
+        };
+        RequestHAndler.getInstance(DetailTerimaActivity.this).addToRequestQueue(strreq);
+    }
+
+    private void Terima1(){
+        String level = lv;
+        String namaa = listcalon.getNama_lengkap();
+        String emaill = listcalon.getEmail();
+        String pass = listcalon.getPass();
+        String tps = listcalon.getTps();
+        loading = new ProgressDialog(DetailTerimaActivity.this);
+        loading.setCancelable(false);
+        loading.setMessage("Menghubungi Server ...");
+        loading.show();
+        StringRequest strreq= new StringRequest(Request.Method.POST, URL.mlebuad, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "onResponse add: "+response);
+                loading.dismiss();
+                Toast.makeText(DetailTerimaActivity.this, namaa +" Diterima sebagai relawan", Toast.LENGTH_SHORT).show();
+                TolakCalrel();
+                finish();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "eror : "+error);
+              //  Toast.makeText(DetailTerimaActivity.this, "Gagal menghubungi server", Toast.LENGTH_SHORT).show();
+                loading.dismiss();
+                // if(isActivityActive) Utils.errorResponse(context, error);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("nama_lengkap", namaa);
+                params.put("username",emaill );
+                params.put("password", pass);
+                params.put("level", lv);
+                params.put("tps", tps);
                 Log.d(TAG, "param: "+params);
                 return params;
             }

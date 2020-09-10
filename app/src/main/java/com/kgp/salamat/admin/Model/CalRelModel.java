@@ -14,6 +14,15 @@ public class CalRelModel {
     String url_image;
     String cdd;
     String hash;
+    String pass;
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 
     public String getTps() {
         return tps;

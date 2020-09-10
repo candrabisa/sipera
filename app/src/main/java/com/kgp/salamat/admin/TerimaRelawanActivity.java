@@ -102,6 +102,7 @@ public class TerimaRelawanActivity extends AppCompatActivity {
                             baru.setAlamat(alamat);
                             baru.setNo_hp(nohp);
                             baru.setEmail(email);
+                            baru.setPass(pass);
                             listcalrel.add(baru);
                         }
                         rvCalrel.setAdapter(new CalRelAdapter(TerimaRelawanActivity.this,listcalrel));

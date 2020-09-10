@@ -23,4 +23,5 @@ public class URL {
     public static final String relawanhapus =BASE_URL+"relawan/delete";
     public static final String addrelawan =BASE_URL+"relawan/add";
     public static final String updatepaslon =BASE_URL+"paslon/update";
+    public static final String mlebuad =BASE_URL+"mlebu/add";
 }
