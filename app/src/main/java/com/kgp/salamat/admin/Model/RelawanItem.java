@@ -2,40 +2,43 @@ package com.kgp.salamat.admin.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class RelawanItem{
 
 	@SerializedName("nik")
-	private String nik;
+	public String nik;
 
 	@SerializedName("id_relawan")
-	private String idRelawan;
+	public String idRelawan;
 
 	@SerializedName("cdd")
-	private String cdd;
+	public String cdd;
 
 	@SerializedName("no_hp")
-	private String noHp;
+	public String noHp;
 
 	@SerializedName("tps")
-	private String tps;
+	public String tps;
 
 	@SerializedName("nama_lengkap")
-	private String namaLengkap;
+	public String namaLengkap;
 
 	@SerializedName("email")
-	private String email;
+	public String email;
 
 	@SerializedName("url_profile")
-	private Object urlProfile;
+	public String urlProfile;
 
 	@SerializedName("hash")
-	private String hash;
+	public String hash;
 
 	@SerializedName("alamat")
-	private String alamat;
+	public String alamat;
 
 	@SerializedName("url_image")
-	private String urlImage;
+	public String urlImage;
 
 	public void setNik(String nik){
 		this.nik = nik;
@@ -93,7 +96,7 @@ public class RelawanItem{
 		return email;
 	}
 
-	public void setUrlProfile(Object urlProfile){
+	public void setUrlProfile(String urlProfile){
 		this.urlProfile = urlProfile;
 	}
 

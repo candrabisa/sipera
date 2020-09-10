@@ -103,10 +103,6 @@ String idtps;
         loding.setMessage("Sedang Menghapus ...");
         loding.show();
 
-
-
-
-
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL.buangtps, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

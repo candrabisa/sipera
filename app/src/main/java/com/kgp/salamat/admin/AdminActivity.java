@@ -28,9 +28,10 @@ import org.json.JSONObject;
 
 public class AdminActivity extends AppCompatActivity {
 ProgressDialog progressDialog;
-TextView jumlahtps,totalcalonrel,jumlpaslon;
-    private String totaltps,totcalrel,totalpaslon;
+TextView jumlahtps,totalcalonrel,jumlpaslon,jmlrel;
+    private String totaltps,totcalrel,totalpaslon,totalrel;
     private static final String TAG = "AdminActivity";
+
 
 
     @Override
@@ -40,6 +41,7 @@ TextView jumlahtps,totalcalonrel,jumlpaslon;
         jumlahtps=findViewById(R.id.jumlahtps_admin);
         totalcalonrel=findViewById(R.id.tvcalonrel);
         jumlpaslon=findViewById(R.id.tv_paslonha);
+        jmlrel=findViewById(R.id.txjmlrel);
 
 
     }
@@ -47,9 +49,12 @@ TextView jumlahtps,totalcalonrel,jumlpaslon;
     @Override
     protected void onResume() {
         super.onResume();
-        JumlahTps();
         Jumlahcalonrel();
+        jumlahrelawan();
         jumpas();
+        JumlahTps();
+
+
     }
 
     public void HasilSuara(View view) {
@@ -93,6 +98,31 @@ TextView jumlahtps,totalcalonrel,jumlpaslon;
             @Override
             public void onErrorResponse(VolleyError error) {
                // Toast.makeText(AdminActivity.this, "Terjadi maslaah di server", Toast.LENGTH_SHORT).show();
+            }
+        }){
+
+        };
+
+        RequestHAndler.getInstance(AdminActivity.this).addToRequestQueue(stringRequest);
+    }
+
+    private void jumlahrelawan(){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL.jumlahrel, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jumut = new JSONObject(response);
+                    totalrel = jumut.getString("Total");
+                    jmlrel.setText(totalrel);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Toast.makeText(AdminActivity.this, "Terjadi maslaah di server", Toast.LENGTH_SHORT).show();
             }
         }){
 

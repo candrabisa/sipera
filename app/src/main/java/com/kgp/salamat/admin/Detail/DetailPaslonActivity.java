@@ -87,4 +87,52 @@ ModelPaslon listpaslon;
         RequestHAndler.getInstance(DetailPaslonActivity.this).addToRequestQueue(stringRequest);
     }
 
+    public void Updatepaslon(View view) {
+        update();
+    }
+    private void update() {
+            String nomer = no.getText().toString();
+            String namaa = nama.getText().toString();
+            if(nomer.isEmpty()){
+                no.setError("No Paslon tidak boleh kosong");
+                no.requestFocus();
+            }else if(namaa.isEmpty()){
+                nama.setError("Nama Paslon tidak boleh kosong");
+                nama.requestFocus();
+            }else{
+                loding = new ProgressDialog(DetailPaslonActivity.this);
+                loding.setCancelable(false);
+                loding.setMessage("Menghubungi server ...");
+                loding.show();
+                StringRequest stringRequest= new StringRequest(Request.Method.PUT, URL.updatepaslon, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "onResponse add: "+response);
+                        loding.dismiss();
+                        Toast.makeText(DetailPaslonActivity.this, "Berhasil disimpan", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "eror : "+error);
+                        loding.dismiss();
+                        Toast.makeText(DetailPaslonActivity.this, "Gagal menghubungi server", Toast.LENGTH_SHORT).show();
+                        // if(isActivityActive) Utils.errorResponse(context, error);
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("id_paslon", id);
+                        params.put("no_paslon", nomer);
+                        params.put("nama_paslon", namaa);
+                        Log.d(TAG, "getParams: "+params);
+                        return params;
+                    }
+                };
+                RequestHAndler.getInstance(DetailPaslonActivity.this).addToRequestQueue(stringRequest);
+            }
+
+    }
 }

@@ -34,6 +34,7 @@ ProgressDialog loding;
         setContentView(R.layout.activity_add_paslon);
         txnama=findViewById(R.id.id_nama_paslon_admin);
         txno=findViewById(R.id.id_no_paslon_admin);
+        getSupportActionBar().setTitle("Tambah Paslon");
     }
 
     private void addpalon() {

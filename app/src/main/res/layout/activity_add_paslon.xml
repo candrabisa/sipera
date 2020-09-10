@@ -13,22 +13,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Tambah Paslon"
-            android:textSize="23dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="20 Agsutus 2019" />
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="400dp"
@@ -52,6 +36,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:id="@+id/id_no_paslon_admin"
+                android:inputType="number"
                 android:layout_height="wrap_content"
                 android:hint="No Paslon" />
         </com.google.android.material.textfield.TextInputLayout>

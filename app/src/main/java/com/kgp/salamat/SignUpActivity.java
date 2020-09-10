@@ -69,6 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText etReg_NIK, etReg_Nama, etReg_Alamat, etReg_NoHP, etReg_Email, etReg_Password, etReg_UlangiPassword;
     TextView tvReg_Login;
     ImageView ivReg_KTP;
+    ProgressDialog loading;
     private List<String>listspineralamat = new ArrayList<>();
     private List<SpinnerItem> spinnerItems=new ArrayList<>();
     private static final String TAG = "SignUpActivity";
@@ -148,6 +149,10 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void signup(){
+        loading = new ProgressDialog(this);
+        loading.setMessage("Regristrasi...");
+        loading.setCancelable(false);
+        loading.show();
         String nik = etReg_NIK.getText().toString();
         String nama_lengkap = etReg_Nama.getText().toString();
         String alamat = etReg_Alamat.getText().toString();
@@ -216,17 +221,21 @@ public class SignUpActivity extends AppCompatActivity {
                         String status = responseDaftars.getStatus();
                         if (status.equals("200")){
                             Toast.makeText(SignUpActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                            loading.dismiss();
                             Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
+                            loading.dismiss();
                             Toast.makeText(SignUpActivity.this, "Registrasi gagal", Toast.LENGTH_SHORT).show();
+
                         }
 
                     }
 
                     @Override
                     public void onFailure(Call<ResponseDaftar> call, Throwable t) {
+                        loading.dismiss();
                         Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });

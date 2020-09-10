@@ -2,9 +2,12 @@ package com.kgp.salamat.admin;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -13,17 +16,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.kgp.salamat.R;
 import com.kgp.salamat.admin.Adapter.RelAdapter;
 import com.kgp.salamat.admin.Adapter.TpsAdapter;
+import com.kgp.salamat.admin.Detail.DetailTpsActivity;
+import com.kgp.salamat.admin.Helper.RequestHAndler;
 import com.kgp.salamat.admin.Helper.RetroConfig;
 import com.kgp.salamat.admin.Model.RelawanItem;
 import com.kgp.salamat.admin.Model.ResponseRelawanAdmin;
 import com.kgp.salamat.admin.Model.TpsItem;
 import com.kgp.salamat.admin.Service.AdminService;
+import com.kgp.salamat.admin.Service.URL;
+import com.kgp.salamat.relawan.ListRelawan;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,16 +45,24 @@ public class ListRelawanActivity extends AppCompatActivity {
 private List<RelawanItem>listrelawan = new ArrayList<>();
 private RecyclerView recyclerView;
 private SwipeRefreshLayout swipeRefreshLayout;
+
     private static final String TAG = "ListRelawanActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_relawan);
         recyclerView = findViewById(R.id.idrcreladmin);
+
         swipeRefreshLayout = findViewById(R.id.swipepunyarel);
         ketikadiswipe();
+
        
     }
+
+
+
+
+
 
     private void ambilrelawan() {
         final ProgressDialog loding = new ProgressDialog(ListRelawanActivity.this);
@@ -125,6 +145,8 @@ private SwipeRefreshLayout swipeRefreshLayout;
 
             @Override
             public boolean onQueryTextChange(String s) {
+                List<RelawanItem>filtercatatan=fiterData(listrelawan, s);
+                recyclerView.setAdapter(new RelAdapter(ListRelawanActivity.this,filtercatatan));
                 return false;
             }
         });

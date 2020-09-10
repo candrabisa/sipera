@@ -4,7 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,12 +21,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.kgp.salamat.R;
-import com.kgp.salamat.admin.Adapter.CalRelAdapter;
 import com.kgp.salamat.admin.Adapter.PaslonAdapter;
+import com.kgp.salamat.admin.Adapter.RelAdapter;
 import com.kgp.salamat.admin.Add.AddPaslonActivity;
 import com.kgp.salamat.admin.Helper.RequestHAndler;
-import com.kgp.salamat.admin.Model.CalRelModel;
 import com.kgp.salamat.admin.Model.ModelPaslon;
+import com.kgp.salamat.admin.Model.RelawanItem;
 import com.kgp.salamat.admin.Service.URL;
 import com.kgp.salamat.model.PaslonItem;
 
@@ -70,6 +74,44 @@ public class DataPaslonActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.navcaritps,menu);
+        MenuItem item = menu.findItem(R.id.navcaritps);
+        getSupportActionBar().setTitle("Data Paslon    ");
+        android.widget.SearchView searchView = (android.widget.SearchView)item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                List<ModelPaslon>filtercatatan=fiterData(listpaslon, s);
+                rvpaslon.setAdapter(new PaslonAdapter(DataPaslonActivity.this,filtercatatan));
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                List<ModelPaslon>filtercatatan=fiterData(listpaslon, s);
+                rvpaslon.setAdapter(new PaslonAdapter(DataPaslonActivity.this,filtercatatan));
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private List<ModelPaslon> fiterData(List<ModelPaslon> catatansaya, String newQuery) {
+        String lowercase=newQuery.toLowerCase();
+        List<ModelPaslon> filterData=new ArrayList<>();
+        for (int i = 0; i < catatansaya.size(); i++) {
+            String text=catatansaya.get(i).getNama_paslon().toLowerCase();
+            String tanggal=catatansaya.get(i).getNo_paslon().toLowerCase();
+            if(text.contains(lowercase)||tanggal.contains(lowercase)){
+                filterData.add(catatansaya.get(i));
+            }
+        }
+        return filterData;
+    };
 
     public void getpaslon(){
         dialog = new ProgressDialog(DataPaslonActivity.this);

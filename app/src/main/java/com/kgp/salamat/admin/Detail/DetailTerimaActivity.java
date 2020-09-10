@@ -2,6 +2,7 @@ package com.kgp.salamat.admin.Detail;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -39,10 +40,12 @@ public class DetailTerimaActivity extends AppCompatActivity {
    TextView tps;
    //SpinKitView loading;
    ProgressDialog loading;
+    private static final String TAG = "DetailTerimaActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_terima);
+        getSupportActionBar().setTitle("Detail Calon Relawan");
         nik = findViewById(R.id.nikdetterima);
         nama = findViewById(R.id.idnamadetter);
         alamat = findViewById(R.id.idalamatdetter);
@@ -62,6 +65,51 @@ public class DetailTerimaActivity extends AppCompatActivity {
 
 
     }
+    private void Terima(){
+        String nikk = listcalon.getNik();
+        String namaa = listcalon.getNama_lengkap();
+        String alamatt = listcalon.getAlamat();
+        String hpp = listcalon.getNo_hp();
+        String tpss = listcalon.getTps();
+        String emaill = listcalon.getEmail();
+        loading = new ProgressDialog(DetailTerimaActivity.this);
+        loading.setCancelable(false);
+        loading.setMessage("Menghubungi Server ...");
+        loading.show();
+        StringRequest strreq= new StringRequest(Request.Method.POST, URL.addrelawan, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "onResponse add: "+response);
+                loading.dismiss();
+                Toast.makeText(DetailTerimaActivity.this, namaa +" Diterima sebagai relawan", Toast.LENGTH_SHORT).show();
+                TolakCalrel();
+                finish();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "eror : "+error);
+                Toast.makeText(DetailTerimaActivity.this, "Gagal menghubungi server", Toast.LENGTH_SHORT).show();
+                loading.dismiss();
+                // if(isActivityActive) Utils.errorResponse(context, error);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("nik", nikk);
+                params.put("nama_lengkap",namaa );
+                params.put("alamat", alamatt);
+                params.put("no_hp", hpp);
+                params.put("email", emaill);
+                params.put("url_image", "");
+                params.put("tps", tpss);
+                Log.d(TAG, "param: "+params);
+                return params;
+            }
+        };
+        RequestHAndler.getInstance(DetailTerimaActivity.this).addToRequestQueue(strreq);
+    }
 
     private void TolakCalrel(){
        //loading.setVisibility(View.VISIBLE);
@@ -75,7 +123,7 @@ public class DetailTerimaActivity extends AppCompatActivity {
             public void onResponse(String response) {
                // loading.setVisibility(View.GONE);
                 loading.dismiss();
-                Toast.makeText(DetailTerimaActivity.this, namaa+" Ditolak", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(DetailTerimaActivity.this, namaa+" Ditolak", Toast.LENGTH_SHORT).show();
                 finish();
 
             }
@@ -101,5 +149,9 @@ public class DetailTerimaActivity extends AppCompatActivity {
 
     public void Tolakcalrel(View view) {
         TolakCalrel();
+    }
+
+    public void TERIMA(View view) {
+        Terima();
     }
 }

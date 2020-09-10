@@ -1,6 +1,8 @@
 package com.kgp.salamat.admin.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kgp.salamat.R;
+import com.kgp.salamat.admin.Detail.DetailListRelawanActivity;
+import com.kgp.salamat.admin.Detail.DetailTpsActivity;
 import com.kgp.salamat.admin.Model.RelawanItem;
 import com.kgp.salamat.admin.Model.TpsItem;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
 public class RelAdapter extends RecyclerView.Adapter<RelAdapter.holder> {
+    public static final String DATA_REL = "reldat";
+    public static final String DATA_EXTRA_REL = "extradat";
     Context context;
     List<RelawanItem>listrelawan;
 
@@ -41,7 +49,11 @@ public class RelAdapter extends RecyclerView.Adapter<RelAdapter.holder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent pindah=new Intent(context, DetailListRelawanActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putParcelable(DATA_REL, Parcels.wrap(listrelawan.get(position)));
+                pindah.putExtra(DATA_EXTRA_REL,bundle);
+                context.startActivity(pindah);
             }
         });
     }

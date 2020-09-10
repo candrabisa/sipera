@@ -7,7 +7,7 @@ public class URL {
     public static final String JUMLAH_TPS = BASE_URL + "tps/jumlahtps";
     public static final String TokenWilayah ="https://x.rajaapi.com/poe";
     public static final String Wilayah ="https://x.rajaapi.com/MeP7c5ne";
-    public static final String TambahTps =" http://nakulasadewaindonesia.com/tikep/service/tps/add";
+    public static final String TambahTps =BASE_URL+"tps/add";
     public static final String GetRelawanbyMail ="relawan/jumutemail";
     public static final String buangtps =BASE_URL+"tps/buangtps";
     public static final String updatetps =BASE_URL+"tps/update";
@@ -19,4 +19,8 @@ public class URL {
     public static final String jumpas =BASE_URL+"paslon/jumlah";
     public static final String deletepaslon =BASE_URL+"paslon/hapus";
     public static final String getrelawan =BASE_URL+"relawan/ambilrelawan";
+    public static final String jumlahrel =BASE_URL+"relawan/jumlah";
+    public static final String relawanhapus =BASE_URL+"relawan/delete";
+    public static final String addrelawan =BASE_URL+"relawan/add";
+    public static final String updatepaslon =BASE_URL+"paslon/update";
 }

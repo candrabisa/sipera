@@ -13,21 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Detail  Relawan"
-            android:textSize="23dp"
-            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="20 Agsutus 2019" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -41,7 +27,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:id="@+id/detlisrelnik"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 android:hint="NIK" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,6 +40,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/detlistrelnama"
+                android:editable="false"
                 android:hint="Nama Lengkap" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,6 +52,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/detlisalamat"
+                android:editable="false"
                 android:hint="Alamat" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,6 +64,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/detlisrelhp"
+                android:editable="false"
                 android:hint="No Hp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,28 +76,35 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:editable="false"
+                android:id="@+id/detlistelemail"
                 android:hint="Email" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/textView6"
+            android:textSize="19dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tempat Bertugas" />
+        <TextView
+            android:id="@+id/txtpsdetailrel"
+            android:textSize="19dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tempat Bertugas" />
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnhapusrelawan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
@@ -112,15 +113,6 @@
                 android:text="Hapus"
                 android:textColor="#FFFFFF" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:layout_weight="1"
-                android:background="@drawable/btnok"
-                android:text="Update"
-                android:textColor="#FFFFFF" />
         </LinearLayout>
 
     </LinearLayout>
