@@ -167,9 +167,8 @@
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/ss_TPS"
                     android:layout_width="300dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/spinner"
                     app:hintText="Pilih TPS Tempat Bertugas" />
                 <!--                android:entries="@array/list_tps"-->
 
